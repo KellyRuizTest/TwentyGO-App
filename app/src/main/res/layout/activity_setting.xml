@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.HomeFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/layout_editprofile_appbar" >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:focusable="auto"
+            app:titleMargin="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:text="Edit Profile"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/logout_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_exit_to_app_24"
+                />
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/circle_change_imageprofile"
+        android:layout_below="@+id/layout_editprofile_appbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/profile"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change profile picture"
+        android:layout_below="@+id/circle_change_imageprofile"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorAzul"
+
+        />
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="27dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edit_id"
+        android:layout_width="326dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="207dp"
+        android:layout_marginEnd="27dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edit_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="265dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="35dp"
+        android:ems="10"
+        android:hint="Bio"
+        android:inputType="textPersonName" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_bio"
+        android:layout_marginTop="6dp"
+        android:text="Profile Information"
+        android:layout_marginStart="21dp"
+        android:textStyle="bold"
+        android:id="@+id/profile_info_textview"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/border_layout"
+        android:layout_marginTop="6dp"
+        />
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_info_textview"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="29dp"
+        android:hint="Email"
+        android:focusable="false"
+        android:inputType="none" />
+
+    <EditText
+        android:id="@+id/edit_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_email"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="29dp"
+        android:hint="Phone"
+        android:inputType="none" />
+
+    <EditText
+        android:id="@+id/edit_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_phone"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="29dp"
+        android:hint="Gender"
+        android:inputType="textCapCharacters" />
+
+    <Button
+        android:id="@+id/register_account"
+        android:layout_width="152dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/edit_sex"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27dp"
+        android:background="@drawable/borde_redondo"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1041868093066",
+    "firebase_url": "https://encounter-app-90614.firebaseio.com",
+    "project_id": "encounter-app-90614",
+    "storage_bucket": "encounter-app-90614.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041868093066:android:946537887681e29d5adf73",
+        "android_client_info": {
+          "package_name": "com.example.encounter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041868093066-4225l7prebnkuad5lpdcdh2drli8b4q0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZVaFCW3xFSdp12Ab3z5xLM2LTs-1r438"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041868093066-4225l7prebnkuad5lpdcdh2drli8b4q0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
