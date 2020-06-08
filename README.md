@@ -13,11 +13,15 @@ This is a Encounter.
 Project Part of 30 days of Kotlin.
 
 <h2> Lessons & Learninngs </h2
-It was my first touch with Kotlin I really appreciate this new Modern programming Language strengths like Expressiveness (lambdas,
-coroutines, named parameters to Android Libraries in some cases I was tempted to use Java code in the project which is another strength
+
+It was my first touch with Kotlin, 
+I really appreciate this new Modern programming Language strengths like Expressiveness (lambdas,
+coroutines, named parameters to Android Libraries 
+in some cases I was tempted to use Java code in the project which is another strength
 ok Kotlin Interoperability.
 
-I really enjoy it, however there is a long way to Android Development in Kotlin 
+
+however there is a long way to Android Development in Kotlin 
 
 <h2> TODO </h2>
 
