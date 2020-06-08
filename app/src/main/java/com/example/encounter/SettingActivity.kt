@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.example.encounter.Model.Users
+import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -19,23 +21,26 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
+import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.android.synthetic.main.activity_post.*
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
 
-    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
-    private var photoCheck : Boolean = false
-    private var UrL = ""
-    private var imageUri : Uri? = null
-    private var storageReference : StorageReference? = null
+    private lateinit var  firebaseUser : FirebaseUser
+    private var photoCheck: Boolean = false
+    private var URL = ""
+    private var imageUri: Uri? = null
+    private var storageProfileRef: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        storageReference = FirebaseStorage.getInstance().reference.child("Profile Picture")
+        firebaseUser = FirebaseAuth.getInstance().currentUser!!
+        storageProfileRef = FirebaseStorage.getInstance().reference.child("Profile Picture")
 
         logout_btn.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -47,18 +52,12 @@ class SettingActivity : AppCompatActivity() {
         }
 
         circle_change_imageprofile.setOnClickListener {
-
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
             photoCheck = true
-
-            startActivityForResult(intent,1)
-            //CropImage.activity().setAspectRatio(1,1).start(this@SettingActivity)
+            CropImage.activity().setAspectRatio(1,1).start(this@SettingActivity)
         }
 
         register_account.setOnClickListener {
-            if (photoCheck){
+            if (photoCheck) {
                 uploadImage()
             } else {
                 saveUserData()
@@ -68,9 +67,10 @@ class SettingActivity : AppCompatActivity() {
         userCompleteInfo()
     }
 
-    private fun userCompleteInfo(){
+    private fun userCompleteInfo() {
 
-        val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser?.uid.toString())
+        val userInfo = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(firebaseUser?.uid.toString())
         userInfo.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
@@ -78,14 +78,15 @@ class SettingActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
 
-                if (p0.exists()){
+                if (p0.exists()) {
                     val user = p0.getValue<Users>(Users::class.java)
 
                     edit_name.setText(user!!.getName())
                     edit_id.setText(user!!.getUsername())
                     edit_bio.setText(user!!.getBio())
                     edit_email.setText(user!!.getEmail())
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale).into(circle_change_imageprofile)
+                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale)
+                        .into(circle_change_imageprofile)
 
                 }
             }
@@ -104,7 +105,11 @@ class SettingActivity : AppCompatActivity() {
                 Toast.makeText(this, "Put anything in your Username", Toast.LENGTH_SHORT).show()
             }
             TextUtils.isEmpty(edit_bio.text.toString()) -> {
-                Toast.makeText(this, "To be more elegant write something in your Bio", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "To be more elegant write something in your Bio",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             else -> {
 
@@ -127,23 +132,19 @@ class SettingActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1 && resultCode== Activity.RESULT_OK && data!= null){
-            //val result = CropImage.getActivityResult(data)
-            imageUri = data.data
-            Picasso.get().load(imageUri).placeholder(R.drawable.usermale).into(circle_change_imageprofile)
-        }else{
-
-            Toast.makeText(this, "There is a issue", Toast.LENGTH_SHORT).show()
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val result = CropImage.getActivityResult(data)
+            imageUri = result.uri
+            circle_change_imageprofile.setImageURI(imageUri)
         }
-
     }
 
     private fun uploadImage() {
 
-        val dialogProgres = ProgressDialog(this)
-        dialogProgres.setTitle("Uploading Image")
-        dialogProgres.setMessage("Please wait a minute")
-        dialogProgres.show()
+        val dialogProgress = ProgressDialog(this)
+        dialogProgress.setTitle("Uploading Image")
+        dialogProgress.setMessage("Please wait a minute")
+        dialogProgress.show()
 
         when {
 
@@ -168,46 +169,53 @@ class SettingActivity : AppCompatActivity() {
             }
 
             else -> {
-                val fileRed = storageReference!!.child(firebaseUser!!.uid + ".jpg")
-                val uploadTask: StorageTask<*>
-                uploadTask = fileRed.putFile(imageUri!!)
 
-                val urlTask = uploadTask.continueWith { task ->
-                    if (!task.isSuccessful) {
-                        task.exception?.let {
-                            throw it
-                            dialogProgres.dismiss()
-                        }
-                    }
-                    return@continueWith fileRed.downloadUrl
-                }.addOnCompleteListener { task ->
+                val progressDialog = ProgressDialog(this)
+                progressDialog.setTitle("Add new Post")
+                progressDialog.setMessage("Please wait")
+                progressDialog.show()
+
+                val fileRef = storageProfileRef!!.child(firebaseUser!!.uid + ".jpg")
+
+                var uploadTask: StorageTask<*>
+                uploadTask = fileRef.putFile(imageUri!!)
+
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                     if (task.isSuccessful) {
 
-                        val downloadUri = task.result
-                        UrL = downloadUri.toString()
-                        println("=======================================================================================")
-                        println(UrL)
-                        println(fileRed.toString())
-                        println("=======================================================================================")
-                        val ref = FirebaseDatabase.getInstance().reference.child("users")
+                        task.exception?.let {
+                            throw it
+                            progressDialog.dismiss()
+                        }
+                    }
+                    return@Continuation fileRef.downloadUrl
+                }).addOnCompleteListener(OnCompleteListener { task ->
+
+                    if (task.isSuccessful){
+                        val downloadUrl = task.result
+                        URL = downloadUrl.toString()
+
+                        val ref = FirebaseDatabase.getInstance().reference.child("Users")
                         val userMap = HashMap<String, Any>()
                         userMap["name"] = edit_name.text.toString()
                         userMap["username"] = edit_id.text.toString()
                         userMap["bio"] = edit_bio.text.toString()
-                        userMap["image"] = UrL
+                        userMap["image"] = URL
 
                         ref.child(firebaseUser!!.uid).updateChildren(userMap)
                         val intentToMain = Intent(this, MainActivity::class.java)
                         startActivity(intentToMain)
                         finish()
-                        dialogProgres.dismiss()
-                    } else{
-                        dialogProgres.dismiss()
-                    }
+                        progressDialog.dismiss()
+                    }else{
+                        Toast.makeText(this, "Another Error", Toast.LENGTH_SHORT).show()
+                        progressDialog.dismiss()
 
-                }
+                    }
+                })
+
             }
+
         }
     }
-
 }

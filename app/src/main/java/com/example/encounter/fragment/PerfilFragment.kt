@@ -126,7 +126,6 @@ class PerfilFragment : Fragment() {
 
                 if (p0.exists()){
                     val user = p0.getValue<Users>(Users::class.java)
-
                     Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale).into(view?.profile_image)
                     view?.name_profile?.text = user!!.getName()
                     view?.description_profile?.text = user!!.getBio()
