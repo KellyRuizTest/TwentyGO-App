@@ -32,12 +32,6 @@
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SOY HOME TEXTVIEW"
-        android:layout_above="@id/recycler_view_home"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

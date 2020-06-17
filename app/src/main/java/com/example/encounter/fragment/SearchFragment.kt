@@ -62,7 +62,6 @@ class SearchFragment : Fragment() {
         userAdapter = context?.let { UserAdapter(it, listUser as ArrayList<Users>, true) }
         recyclerView?.adapter = userAdapter
 
-
         view.search_user_editext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

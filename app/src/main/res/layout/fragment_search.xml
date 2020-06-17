@@ -48,7 +48,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:layout_below="@+id/layout_search_appbar"
         android:id="@+id/recycler_search_users">
 

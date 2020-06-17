@@ -55,7 +55,7 @@
         android:layout_below="@+id/layout_editprofile_appbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:src="@drawable/profile"
+        android:src="@drawable/usermale"
         />
 
     <TextView

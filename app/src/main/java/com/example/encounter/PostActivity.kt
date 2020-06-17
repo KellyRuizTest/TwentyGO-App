@@ -1,6 +1,7 @@
 package com.example.encounter
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
@@ -8,16 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import com.example.encounter.Model.Users
+import com.example.encounter.fragment.TimePickerFragment
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
+import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_post.*
 
@@ -46,6 +53,21 @@ class PostActivity : AppCompatActivity() {
             startActivity(intentToMain)
             finish() }
 
+        userCompleteInfo()
+
+        edit_calendar.setOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog(){
+        val newFragment = TimePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
+
+            val seletedDate = day.toString() + "/" + (month+1) + "/" + year
+            date_pick.setText(seletedDate)
+
+        })
+        newFragment.show(supportFragmentManager, "datePicker")
     }
 
 
@@ -53,7 +75,8 @@ class PostActivity : AppCompatActivity() {
 
         when{
             imageUri == null -> Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
-            TextUtils.isEmpty(editPost.text.toString()) -> Toast.makeText(this, "write a description", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(edit_description_post.text.toString()) -> Toast.makeText(this, "write a description", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(edit_post.text.toString()) -> Toast.makeText(this, "write a Title", Toast.LENGTH_SHORT).show()
 
             else -> {
 
@@ -87,8 +110,10 @@ class PostActivity : AppCompatActivity() {
                         val postId = ref.push().key
                         val postAux = HashMap<String, Any>()
                         postAux["pid"] = postId!!
-                        postAux["description"] = editPost.text.toString()
+                        postAux["title"] = edit_post.text.toString()
+                        postAux["description"] = edit_description_post.text.toString()
                         postAux["username"] = FirebaseAuth.getInstance().currentUser!!.uid
+                        postAux["date"] = date_pick.text.toString()
                         postAux["image"] = URL
 
                         ref.child(postId).updateChildren(postAux)
@@ -111,6 +136,24 @@ class PostActivity : AppCompatActivity() {
             image_post.setImageURI(imageUri)
         }
 
+    }
+
+    private fun userCompleteInfo(){
+
+        val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser?.uid.toString())
+        userInfo.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                if (p0.exists()){
+                    val user = p0.getValue<Users>(Users::class.java)
+                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale).into(show_image_tweeting)
+                }
+            }
+        })
     }
 
 }
