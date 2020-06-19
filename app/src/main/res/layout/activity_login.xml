@@ -29,8 +29,7 @@
         android:src="@drawable/encounter"
         />
 
-    <EditText
-        android:id="@+id/edit_email_login"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -39,12 +38,22 @@
         android:layout_marginStart="39dp"
         android:layout_marginTop="186dp"
         android:layout_marginEnd="41dp"
-        android:ems="10"
         android:hint="Email or username"
-        android:inputType="textEmailAddress" />
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:endIconMode="clear_text"
+        app:boxStrokeColor="#618B9E"
+        >
 
-    <EditText
-        android:id="@+id/edit_pass_login"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_email_login"
+            android:inputType="textEmailAddress"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -55,7 +64,18 @@
         android:layout_marginEnd="43dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:endIconMode="password_toggle"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_pass_login"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView3"
@@ -63,9 +83,9 @@
         android:layout_height="32dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="293dp"
+        android:layout_marginTop="296dp"
         android:layout_marginEnd="44dp"
-        android:text="Olvidaste tu password?" />
+        android:text="forgot your password?" />
 
     <Button
         android:id="@+id/login_account"
@@ -93,7 +113,7 @@
         android:background="@drawable/borde_redondo"
         android:text="Need A New Account?"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 

@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationActivity">
 
-    <EditText
-        android:id="@+id/edit_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Text"
         android:layout_width="326dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -19,7 +19,14 @@
         android:layout_marginEnd="27dp"
         android:ems="10"
         android:hint="Name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView"
@@ -28,15 +35,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="127dp"
-        android:text="Crea tu cuenta"
+        android:layout_marginTop="129dp"
+        android:text="Create an account"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edit_id"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="326dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -47,10 +53,17 @@
         android:layout_marginEnd="27dp"
         android:ems="10"
         android:hint="Username"
-        android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/edit_pass"
+        android:inputType="textPersonName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="327dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -61,11 +74,21 @@
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        app:endIconMode="password_toggle"
+         >
 
-    <EditText
-        android:id="@+id/edit_email"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="327dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -73,10 +96,19 @@
         android:layout_marginStart="31dp"
         android:layout_marginTop="275dp"
         android:layout_marginEnd="29dp"
-        android:background="@drawable/inputs_background"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_baseline_email_24" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_email"
+            android:inputType="textEmailAddress"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -95,12 +127,12 @@
         android:layout_height="36dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="391dp"
+        android:layout_marginTop="405dp"
         android:layout_marginEnd="27dp"
         android:background="@drawable/borde_redondo"
         android:text="Register"
         android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/background_light"
         android:textSize="16sp"
         android:textStyle="bold" />
 
