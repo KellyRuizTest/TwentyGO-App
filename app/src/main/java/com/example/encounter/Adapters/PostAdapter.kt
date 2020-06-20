@@ -1,6 +1,7 @@
 package com.example.encounter.Adapters
 
 import android.content.Context
+import android.content.Intent
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.encounter.MainActivity
 import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
 import com.example.encounter.R
@@ -68,6 +70,64 @@ class PostAdapter(
 
         userInfo(holder.profileImage, holder.idUser, post.getUsername())
 
+        isLike(post.getPid(), holder.likeButton)
+        numberOfLikes(holder.countLike, post.getPid())
+
+        holder.likeButton.setOnClickListener {
+
+            if (holder.likeButton.tag == "Likes"){
+                FirebaseDatabase.getInstance().reference.child("Likes").child(post.getPid()).child(firebaseUser!!.uid).setValue(true)
+            }else{
+                FirebaseDatabase.getInstance().reference.child("Likes").child(post.getPid()).child(firebaseUser!!.uid).removeValue()
+                val intent = Intent(mContext, MainActivity::class.java)
+                mContext.startActivity(intent)
+            }
+        }
+
+    }
+
+    private fun numberOfLikes(countLike: TextView, pid: String) {
+
+        val LikesRef = FirebaseDatabase.getInstance().reference.child("Likes").child(pid)
+        LikesRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()){
+                    countLike.text = p0.childrenCount.toString() + " likes"
+                }
+            }
+
+        })
+
+    }
+
+    private fun isLike(pid: String, likeButton: ImageView) {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        val LikesRef = FirebaseDatabase.getInstance().reference.child("Likes").child(pid)
+        LikesRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.child(firebaseUser!!.uid).exists()){
+
+                    likeButton.setImageResource(R.drawable.ic_like_liked)
+                    likeButton.tag = "Liked"
+
+                }else{
+
+                    likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+                    likeButton.tag = "Likes"
+
+                }
+            }
+
+        })
     }
 
     private fun userInfo(profileImage: ImageView, idUser: TextView, pid: String) {

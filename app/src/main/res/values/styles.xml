@@ -7,11 +7,14 @@
         <item name="colorAccent">#5ce1e6</item>
     </style>
 
-    <style name="Widget.MaterialComponents.TextInputEditText.OutlinedBox." parent="Base.Widget.MaterialComponents.TextInputLayout">
+    <style name="MyDesign" parent="Theme.MaterialComponents.Light.NoActionBar">
 
+
+        <item name="colorPrimary">#243743</item>
+        <item name="colorPrimaryDark">#28b78d</item>
+        <item name="colorAccent">#5ce1e6</item>
 
     </style>
-
 
 
 </resources>
