@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.encounter.CommentActivity
 import com.example.encounter.MainActivity
 import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
@@ -48,7 +49,7 @@ class PostAdapter(
         var image : ImageView = itemView.findViewById(R.id.image_post_from)
         var likeButton : ImageView = itemView.findViewById(R.id.like_post)
         var joinButton : ImageView = itemView.findViewById(R.id.join_post)
-        var commetButton : ImageView = itemView.findViewById(R.id.comment_post)
+        var commentButton : ImageView = itemView.findViewById(R.id.comment_post)
 
         var idUser : TextView = itemView.findViewById(R.id.name_user)
         var title : TextView = itemView.findViewById(R.id.post_title)
@@ -71,7 +72,9 @@ class PostAdapter(
         userInfo(holder.profileImage, holder.idUser, post.getUsername())
 
         isLike(post.getPid(), holder.likeButton)
+
         numberOfLikes(holder.countLike, post.getPid())
+        numberOfComments(holder.countComen, post.getPid())
 
         holder.likeButton.setOnClickListener {
 
@@ -84,31 +87,50 @@ class PostAdapter(
             }
         }
 
+        holder.commentButton.setOnClickListener {
+            val intentToComment = Intent(mContext, CommentActivity::class.java)
+            intentToComment.putExtra("pid", post.getPid())
+            intentToComment.putExtra("user", post.getUsername())
+            mContext.startActivity(intentToComment)
+        }
+
     }
 
     private fun numberOfLikes(countLike: TextView, pid: String) {
 
-        val LikesRef = FirebaseDatabase.getInstance().reference.child("Likes").child(pid)
-        LikesRef.addValueEventListener(object : ValueEventListener {
+        val likesRef = FirebaseDatabase.getInstance().reference.child("Likes").child(pid)
+        likesRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()){
-                    countLike.text = p0.childrenCount.toString() + " likes"
+                    countLike.text = p0.childrenCount.toString() + " Likes"
                 }
             }
-
         })
+    }
 
+    private fun numberOfComments(countComment: TextView, pid: String) {
+
+        val commentRef = FirebaseDatabase.getInstance().reference.child("Comments").child(pid)
+        commentRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()){
+                    countComment.text = "view all " + p0.childrenCount.toString() + " comments"
+                }
+            }
+        })
     }
 
     private fun isLike(pid: String, likeButton: ImageView) {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
-        val LikesRef = FirebaseDatabase.getInstance().reference.child("Likes").child(pid)
-        LikesRef.addValueEventListener(object : ValueEventListener {
+        val likesRef = FirebaseDatabase.getInstance().reference.child("Likes").child(pid)
+        likesRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -141,12 +163,6 @@ class PostAdapter(
                 if (dataSnapshot.exists()) {
 
                     val user = dataSnapshot.getValue<Users>(Users::class.java)
-
-                    println("=========================================================================")
-                    println("=========================================================================")
-                    println(user!!.getName() + "/" + user!!.getUsername() + "/" + user!!.getEmail())
-                    println("=========================================================================")
-                    println("=========================================================================")
                     Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale)
                         .into(profileImage)
                     idUser.text = user.getUsername()

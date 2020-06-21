@@ -74,6 +74,16 @@
                         android:scaleType="centerCrop" />
 
                     <TextView
+                        android:id="@+id/count_like"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
                         android:id="@+id/post_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,13 +91,14 @@
                         android:layout_marginLeft="5dp"
                         tools:layout_editor_absoluteX="28dp"
                         tools:layout_editor_absoluteY="101dp"
+                        android:layout_marginTop="2dp"
                         android:maxLength="180"
                         android:maxLines="1"
                         android:textAppearance="?attr/textAppearanceHeadline5"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:padding="6dp"
+                        android:paddingBottom="6dp"
                         />
 
                         <TextView
@@ -103,8 +114,14 @@
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:layout_marginBottom="4dp"
-                            android:padding="6dp"
                             />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/count_comment"
+                            android:layout_marginStart="6dp"
+                             />
 
                     </LinearLayout>
 
@@ -128,14 +145,6 @@
                                 android:layout_marginTop="4dp"
                                 android:src="@drawable/chat" />
 
-                            <TextView
-                                android:id="@+id/count_comment"
-                                android:layout_width="22dp"
-                                android:layout_height="28dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginTop="4dp"
-                                />
-
                             <ImageView
                                 android:id="@+id/like_post"
                                 android:layout_width="28dp"
@@ -144,15 +153,6 @@
                                 android:layout_marginTop="4dp"
                                 android:src="@drawable/ic_favorite_border_black_24dp"
                                 android:tag="NO" />
-
-                            <TextView
-                                android:id="@+id/count_like"
-                                android:layout_width="wrap_content"
-                                android:layout_height="28dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginTop="4dp"
-                                android:textSize="10sp"
-                                />
 
                             <ImageView
                                     android:id="@+id/join_post"
