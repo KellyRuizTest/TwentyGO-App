@@ -27,7 +27,6 @@ import com.squareup.picasso.Picasso
 class PostAdapter(
                     private val mContext: Context,
                     private val listPost: List<Post>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>()
-
 {
 
     private var firebaseUser : FirebaseUser? = null
