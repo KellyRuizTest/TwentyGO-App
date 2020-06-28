@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.encounter.Adapters.MyPostAdapter
 import com.example.encounter.LoginActivity
+import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
 import com.example.encounter.R
 import com.example.encounter.SettingActivity
@@ -17,7 +22,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_perfil.*
 import kotlinx.android.synthetic.main.fragment_perfil.view.*
+import kotlinx.android.synthetic.main.fragment_perfil.view.posts
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +43,9 @@ class PerfilFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
+    var postsList : List<Post>? = null
+    var mypostAdater : MyPostAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +66,20 @@ class PerfilFragment : Fragment() {
         getFollowers()
         getFollowing()
         userCompleteInfo()
+        getPostsCount()
+
+        var recyclerViewPostimages : RecyclerView
+        recyclerViewPostimages = view.findViewById(R.id.recycler_view_own_post)
+        recyclerViewPostimages.setHasFixedSize(true)
+
+        val linearLayoutManager : LinearLayoutManager = GridLayoutManager(context,3)
+        recyclerViewPostimages.layoutManager = linearLayoutManager
+
+        postsList = ArrayList()
+        mypostAdater = context?.let { MyPostAdapter(it, postsList as ArrayList<Post>) }
+        recyclerViewPostimages.adapter = mypostAdater
+
+        allPosts()
 
         return view
     }
@@ -114,6 +140,41 @@ class PerfilFragment : Fragment() {
         })
     }
 
+    private fun allPosts(){
+
+        val postRef = FirebaseDatabase.getInstance().reference.child("Post")
+
+        postRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                if (p0.exists()){
+                    (postsList as ArrayList<Post>).clear()
+
+                    for (eachone in p0.children){
+                        val postone = eachone.getValue(Post::class.java)!!
+
+                        println("<=========================================================================>")
+                        println("firebaseUser: "+firebaseUser!!.uid)
+                        println("postone: "+postone.getUsername())
+                        println("<=========================================================================>")
+
+                        if (postone.getUsername().equals(firebaseUser!!.uid)){
+                            (postsList as ArrayList<Post>).add(postone)
+                        }
+                        Collections.reverse(postsList)
+                        mypostAdater!!.notifyDataSetChanged()
+                    }
+                }
+            }
+        })
+
+    }
+
+
     private fun userCompleteInfo(){
 
         val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser?.uid.toString())
@@ -134,4 +195,31 @@ class PerfilFragment : Fragment() {
             }
         })
     }
+
+
+    private fun getPostsCount(){
+        val postcountRef = FirebaseDatabase.getInstance().reference.child("Post")
+
+        postcountRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()){
+                    var count = 0
+                    for (snap in p0.children){
+                     val postInfo = snap.getValue(Post::class.java)
+                        if (postInfo!!.getUsername().equals(firebaseUser!!.uid.toString())){
+                            count++
+                        }
+                    }
+                    posts.text = ""+count+""
+                }
+            }
+
+
+        })
+    }
+
+
 }
