@@ -21,9 +21,7 @@ class MyPostAdapter(private val Contexto: Context, private val listPost : List<P
     }
 
     override fun getItemCount(): Int {
-
         return listPost.size
-
     }
 
     override fun onBindViewHolder(holder: MyPostAdapter.ViewHolder, position: Int) {
@@ -37,10 +35,7 @@ class MyPostAdapter(private val Contexto: Context, private val listPost : List<P
             send_id.apply()
             (Contexto as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.content_fragment, PostDetailFragment()).commit()
         }
-
     }
-
-
 
     class ViewHolder(@NonNull itemView :  View) : RecyclerView.ViewHolder(itemView){
         var post_image : ImageView =  itemView.findViewById(R.id.post_item)

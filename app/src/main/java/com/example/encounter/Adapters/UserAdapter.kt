@@ -1,6 +1,7 @@
 package com.example.encounter.Adapters
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
-import androidx.core.view.isVisible
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.encounter.FolloworsActivity
 import com.example.encounter.Model.Users
 import com.example.encounter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -88,6 +90,15 @@ class UserAdapter(private var contexto : Context,
                 }
             }
         }
+
+        holder.cardView.setOnClickListener {
+
+            val intent_touser = Intent(contexto, FolloworsActivity::class.java).apply {
+                putExtra("UserID", user.getPid())
+            }
+            contexto.startActivity(intent_touser)
+        }
+
     }
 
     class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -97,6 +108,8 @@ class UserAdapter(private var contexto : Context,
         var bio: TextView = itemView.findViewById(R.id.show_bio)
         var image: ImageView = itemView.findViewById(R.id.show_contact_image)
         var followButton: Button = itemView.findViewById(R.id.button_follow)
+
+        var cardView : CardView = itemView.findViewById(R.id.cardview_show_contact)
 
     }
 
@@ -117,7 +130,6 @@ class UserAdapter(private var contexto : Context,
                     followButton.text = "Follow"
                 }
             }
-
             override fun onCancelled(p0: DatabaseError) {
             }
         })

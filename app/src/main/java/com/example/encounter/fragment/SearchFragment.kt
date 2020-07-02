@@ -89,10 +89,8 @@ class SearchFragment : Fragment() {
                     listUser?.clear()
 
                     for(snapshot in dataSnapshot.children){
-
                         val userSnapshot = snapshot.getValue(Users::class.java)
                         if (userSnapshot != null){
-
                             listUser?.add(userSnapshot)
                         }
                     }
@@ -121,10 +119,8 @@ class SearchFragment : Fragment() {
            }
 
            override fun onCancelled(p0: DatabaseError) {
-
            }
        })
-
    }
 
 

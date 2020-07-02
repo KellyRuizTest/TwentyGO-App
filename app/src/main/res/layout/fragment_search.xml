@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/search_user_editext"
-                    android:hint="Search a friend..."
+                    android:hint="Search a friend by username..."
 
                     />
 

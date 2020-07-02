@@ -128,12 +128,9 @@ class CommentActivity : AppCompatActivity() {
                         val commentEach = snapshot.getValue(Comments::class.java)
                         commentList!!.add(commentEach!!)
                     }
-
                    commentAdapter!!.notifyDataSetChanged()
                }
             }
-
-
         })
     }
 

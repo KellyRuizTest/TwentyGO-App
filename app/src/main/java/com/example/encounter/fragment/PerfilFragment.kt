@@ -171,7 +171,6 @@ class PerfilFragment : Fragment() {
                 }
             }
         })
-
     }
 
 
@@ -220,6 +219,4 @@ class PerfilFragment : Fragment() {
 
         })
     }
-
-
 }
