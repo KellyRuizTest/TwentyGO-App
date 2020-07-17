@@ -25,8 +25,6 @@ however there is a long way to Android Development in Kotlin
 
 <h2> TODO </h2>
 
-- Create Class Model Encounter
-- Conect Recicler view with Firebase Posts
-- Create Stories
+- Need to add post joined
 - Define method to qualify users that post Encounters
 - Polish app
