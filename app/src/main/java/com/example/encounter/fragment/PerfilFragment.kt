@@ -1,15 +1,19 @@
 package com.example.encounter.fragment
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.encounter.Adapters.MyPostAdapter
+import com.example.encounter.FollowingsActivity
 import com.example.encounter.LoginActivity
 import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
@@ -27,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_perfil.view.*
 import kotlinx.android.synthetic.main.fragment_perfil.view.posts
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.jvm.internal.FunctionReference
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,10 +47,11 @@ class PerfilFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+    lateinit var firebaseUser: FirebaseUser
 
     var postsList : List<Post>? = null
     var mypostAdater : MyPostAdapter? = null
+    lateinit var userID : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,12 +67,35 @@ class PerfilFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_perfil, container, false)
+
+        firebaseUser = FirebaseAuth.getInstance().currentUser!!
+
+        val pref = context?.getSharedPreferences("ID", Context.MODE_PRIVATE)
+        if (pref != null) {
+            userID = pref.getString("userID", "none").toString()
+
+            if(userID.equals("none")){
+                userID = firebaseUser.uid.toString()
+            }
+        }
+
+        if (userID != firebaseUser.uid){
+            view.edit_profile.visibility = View.GONE
+            view.logout_btn.visibility = View.INVISIBLE
+            checkFollowingStatusButton()
+        } else {
+            view.following_button.visibility = View.GONE
+            view.mensaje.visibility = View.GONE
+        }
+
         view.edit_profile.setOnClickListener { startActivity(Intent(context, SettingActivity::class.java)) }
 
-        getFollowers()
-        getFollowing()
-        userCompleteInfo()
-        getPostsCount()
+        view.logout_btn.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intentToFinish = Intent(context, LoginActivity::class.java)
+            intentToFinish.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intentToFinish)
+        }
 
         var recyclerViewPostimages : RecyclerView
         recyclerViewPostimages = view.findViewById(R.id.recycler_view_own_post)
@@ -80,6 +109,24 @@ class PerfilFragment : Fragment() {
         recyclerViewPostimages.adapter = mypostAdater
 
         allPosts()
+        getFollowersCount()
+        getFollowingsCount()
+        userCompleteInfo()
+        getPostsCount()
+
+        view.follower_space.setOnClickListener {
+            val intentToShowuser = Intent(context, FollowingsActivity::class.java)
+            intentToShowuser.putExtra("type", "follower")
+            intentToShowuser.putExtra("pid", userID)
+            context?.startActivity(intentToShowuser)
+        }
+
+        view.following_space.setOnClickListener {
+            val intentToShowuser = Intent(context, FollowingsActivity::class.java)
+            intentToShowuser.putExtra("type", "following")
+            intentToShowuser.putExtra("pid", userID)
+            context?.startActivity(intentToShowuser)
+        }
 
         return view
     }
@@ -104,11 +151,10 @@ class PerfilFragment : Fragment() {
             }
     }
 
-    private fun getFollowers(){
-        val followersRef = firebaseUser?.uid.let { it1 ->
-            FirebaseDatabase.getInstance().reference
-                .child("Follow").child(it1.toString()).child("followers")
-        }
+    private fun getFollowersCount(){
+        val followersRef = FirebaseDatabase.getInstance().reference
+                .child("Follow").child(userID!!).child("followers")
+
 
         followersRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -122,11 +168,30 @@ class PerfilFragment : Fragment() {
         })
     }
 
-    private fun getFollowing(){
-        val followersRef = firebaseUser?.uid.let { it1 ->
-            FirebaseDatabase.getInstance().reference
-                .child("Follow").child(it1.toString()).child("following")
-        }
+    private fun checkFollowingStatusButton(){
+        val followingRef = FirebaseDatabase.getInstance().reference
+                .child("Follow").child(firebaseUser.uid).child("following")
+
+        followingRef.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.child(userID).exists()) {
+                    following_button.text = "Following"
+                    following_button.setBackgroundColor(Color.WHITE)
+                    following_button.setBackgroundResource(R.drawable.borde_round_follow)
+                } else {
+                    following_button.text = "Follow"
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
+    }
+
+    private fun getFollowingsCount(){
+        val followersRef = FirebaseDatabase.getInstance().reference
+                .child("Follow").child(userID!!).child("following")
 
         followersRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -157,12 +222,7 @@ class PerfilFragment : Fragment() {
                     for (eachone in p0.children){
                         val postone = eachone.getValue(Post::class.java)!!
 
-                        println("<=========================================================================>")
-                        println("firebaseUser: "+firebaseUser!!.uid)
-                        println("postone: "+postone.getUsername())
-                        println("<=========================================================================>")
-
-                        if (postone.getUsername().equals(firebaseUser!!.uid)){
+                        if (postone.getUsername().equals(userID)){
                             (postsList as ArrayList<Post>).add(postone)
                         }
                         Collections.reverse(postsList)
@@ -176,12 +236,11 @@ class PerfilFragment : Fragment() {
 
     private fun userCompleteInfo(){
 
-        val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser?.uid.toString())
+        val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(userID!!)
         userInfo.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
             override fun onDataChange(p0: DataSnapshot) {
 
                 if (p0.exists()){
@@ -208,15 +267,37 @@ class PerfilFragment : Fragment() {
                     var count = 0
                     for (snap in p0.children){
                      val postInfo = snap.getValue(Post::class.java)
-                        if (postInfo!!.getUsername().equals(firebaseUser!!.uid.toString())){
+                        if (postInfo!!.getUsername().equals(userID)){
                             count++
                         }
                     }
                     posts.text = ""+count+""
                 }
             }
-
-
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        val pref = context?.getSharedPreferences("ID", Context.MODE_PRIVATE)?.edit()
+        pref?.putString("userID", firebaseUser.uid)
+        pref?.apply()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        val pref = context?.getSharedPreferences("ID", Context.MODE_PRIVATE)?.edit()
+        pref?.putString("userID", firebaseUser.uid)
+        pref?.apply()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val pref = context?.getSharedPreferences("ID", Context.MODE_PRIVATE)?.edit()
+        pref?.putString("userID", firebaseUser.uid)
+        pref?.apply()
     }
 }

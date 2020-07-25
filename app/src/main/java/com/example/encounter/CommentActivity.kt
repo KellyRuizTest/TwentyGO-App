@@ -3,7 +3,6 @@ package com.example.encounter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,13 +10,14 @@ import com.example.encounter.Adapters.CommentAdapter
 import com.example.encounter.Model.Comments
 import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_comment.*
-import kotlinx.android.synthetic.main.activity_setting.*
 
 class CommentActivity : AppCompatActivity() {
 
@@ -25,14 +25,21 @@ class CommentActivity : AppCompatActivity() {
     private var commenter = ""
     private var commentAdapter : CommentAdapter? = null
     private var commentList: MutableList<Comments>? = null
+    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
 
-        val intentget = intent
+        val bundle = intent.extras
         idpost = intent.getStringExtra("pid")
         commenter = intent.getStringExtra("user")
+
+        println("<==================What is Commenter=======================>")
+        println("<==================What is idPost==========================>")
+        println(idpost)
+        println(commenter)
+        println("<==========================================================>")
 
         val recyclerView : RecyclerView = findViewById(R.id.recycler_comments)
         val linearLayoutManager = LinearLayoutManager(this)
@@ -62,17 +69,19 @@ class CommentActivity : AppCompatActivity() {
 
         val commentsMap = HashMap<String, Any>()
         commentsMap["comment"] = add_comment.text.toString()
-        commentsMap["commenter"] = commenter
+        commentsMap["commenter"] = firebaseUser!!.uid
 
         commentsRef.push().setValue(commentsMap)
-        add_comment!!.text.clear()
+        add_comment!!.text?.clear()
 
     }
 
+    // This is ok method
     private fun userImageInfo() {
 
         val userInfo = FirebaseDatabase.getInstance().reference.child("Users")
-            .child(commenter.toString())
+            .child(firebaseUser!!.uid)
+
         userInfo.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
@@ -90,6 +99,7 @@ class CommentActivity : AppCompatActivity() {
         })
     }
 
+    // This is ok method
     private fun postImageInfo() {
 
         val postInfo = FirebaseDatabase.getInstance().reference.child("Post")
@@ -116,14 +126,13 @@ class CommentActivity : AppCompatActivity() {
         val commentsRef = FirebaseDatabase.getInstance().reference.child("Comments").child(idpost)
 
         commentsRef.addValueEventListener(object : ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                if (p0.exists()){
 
                     commentList!!.clear()
+
                     for (snapshot in p0.children){
                         val commentEach = snapshot.getValue(Comments::class.java)
                         commentList!!.add(commentEach!!)

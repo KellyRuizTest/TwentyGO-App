@@ -42,15 +42,6 @@ class SettingActivity : AppCompatActivity() {
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         storageProfileRef = FirebaseStorage.getInstance().reference.child("Profile Picture")
 
-        logout_btn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-            val intentToMain = Intent(this, LoginActivity::class.java)
-            intentToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intentToMain)
-            finish()
-        }
-
         circle_change_imageprofile.setOnClickListener {
             photoCheck = true
             CropImage.activity().setAspectRatio(1,1).start(this@SettingActivity)

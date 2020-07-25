@@ -10,12 +10,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.encounter.CommentActivity
+import com.example.encounter.FollowingsActivity
 import com.example.encounter.MainActivity
 import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
 import com.example.encounter.R
+import com.example.encounter.fragment.PerfilFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -32,7 +35,6 @@ class PostAdapter(
     private var firebaseUser : FirebaseUser? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostAdapter.PostViewHolder {
-
         val view = LayoutInflater.from(mContext).inflate(R.layout.activity_encounter, parent, false)
         return PostAdapter.PostViewHolder(view)
 
@@ -69,14 +71,11 @@ class PostAdapter(
         holder.descriptionPost.text = post.getDescription()
 
         userInfo(holder.profileImage, holder.idUser, post.getUsername())
-
         isLike(post.getPid(), holder.likeButton)
-
         numberOfLikes(holder.countLike, post.getPid())
         numberOfComments(holder.countComen, post.getPid())
 
         holder.likeButton.setOnClickListener {
-
             if (holder.likeButton.tag == "Likes"){
                 FirebaseDatabase.getInstance().reference.child("Likes").child(post.getPid()).child(firebaseUser!!.uid).setValue(true)
             }else{
@@ -93,6 +92,27 @@ class PostAdapter(
             mContext.startActivity(intentToComment)
         }
 
+        holder.countLike.setOnClickListener {
+
+            val intentToShowuser = Intent(mContext, FollowingsActivity::class.java)
+            intentToShowuser.putExtra("type", "likes")
+            intentToShowuser.putExtra("pid", post.getPid())
+            mContext.startActivity(intentToShowuser)
+        }
+
+        holder.countComen.setOnClickListener {
+            val intentToComment = Intent(mContext, CommentActivity::class.java)
+            intentToComment.putExtra("pid", post.getPid())
+            intentToComment.putExtra("user", post.getUsername())
+            mContext.startActivity(intentToComment)
+        }
+
+        holder.idUser.setOnClickListener {
+            val send_id = mContext.getSharedPreferences("ID", Context.MODE_PRIVATE).edit()
+            send_id.putString("userID", post.getUsername())
+            send_id.apply()
+            (mContext as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.content_fragment, PerfilFragment()).commit()
+        }
     }
 
     private fun numberOfLikes(countLike: TextView, pid: String) {

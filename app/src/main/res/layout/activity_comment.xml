@@ -34,11 +34,12 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/belowLayaout"
+        >
 
             <ImageView
                 android:id="@+id/post_image_comment"
@@ -58,52 +59,117 @@
                 >
             </androidx.recyclerview.widget.RecyclerView>
         </ScrollView>
+    </LinearLayout>
 
-    <RelativeLayout
+    <!--
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/recycler_comments">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorWhite"
+        style="@style/MyDesign"
+        app:fabAlignmentMode="end"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="15dp"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorPrimaryDark">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageprofile_comment"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/usermale"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/belowLayaout"
+            android:layout_marginStart="10dp"
+            android:foregroundGravity="center"
+            android:paddingStart="2dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
             app:civ_border_color="@color/colorPrimaryDark"
-            app:civ_border_width="1dp" />
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="2dp" />
 
         <EditText
             android:id="@+id/add_comment"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:hint="write a comment..."
-            android:gravity="bottom"
-            android:maxEms="4"
-            android:textSize="14sp"
-            android:layout_toStartOf="@+id/comment_button"
-            android:layout_toEndOf="@+id/imageprofile_comment">
-        </EditText>
+            android:hint="Add a comment"
+            android:layout_marginStart="10dp"
+            android:foregroundGravity="center_horizontal"/>
 
         <Button
             android:id="@+id/comment_button"
             android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="Comment"
-            android:layout_marginEnd="6dp"
-            android:background="@drawable/borde_redondo"
-            android:textAllCaps="false"
-            android:textColor="@android:color/background_light"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/borde_round_follow"
+            android:text="Comment" />
 
-    </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar> -->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bootom_appbar" >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/bottom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:focusable="auto"
+            app:layout_anchor="@+id/bootom_appbar"
+            app:layout_anchorGravity="center"
+            app:titleMargin="1dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageprofile_comment"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp"
+                android:foregroundGravity="center"
+                android:paddingStart="2dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_width="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="2dp" />
+
+            <EditText
+                android:id="@+id/add_comment"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:backgroundTint="@android:color/transparent"
+                android:paddingLeft="2dp"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="Please put a comment"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/comment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="4dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="Comment"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 </RelativeLayout>

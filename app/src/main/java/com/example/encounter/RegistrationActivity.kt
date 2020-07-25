@@ -46,9 +46,7 @@ class RegistrationActivity : AppCompatActivity() {
                 userAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
 
                     if(task.isSuccessful){
-
                         saveInfo(name, username, email, password, progressTask)
-
                     }else{
                         Toast.makeText(this, "Error ", Toast.LENGTH_SHORT).show()
                         userAuth.signOut()

@@ -73,32 +73,77 @@
                         android:layout_height="256dp"
                         android:scaleType="centerCrop" />
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:padding="2dp">
+
+                            <ImageView
+                                android:id="@+id/comment_post"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="4dp"
+                                android:src="@drawable/chat" />
+
+                            <ImageView
+                                android:id="@+id/like_post"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginLeft="50dp"
+                                android:layout_alignLeft="@+id/comment_post"
+                                android:src="@drawable/ic_favorite_border_black_24dp"
+                                android:tag="NO" />
+
+                            <ImageView
+                                android:id="@+id/join_post"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginRight="25dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/join"
+                                android:tag="NO" />
+
+                            <TextView
+                                android:id="@+id/join_like"
+                                android:layout_width="wrap_content"
+                                android:layout_height="28dp"
+                                android:layout_alignRight="@+id/join_post"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginTop="4dp" />
+
+                        </RelativeLayout>
+
                     <TextView
                         android:id="@+id/count_like"
                         android:layout_width="match_parent"
-                        android:layout_height="28dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="5dp"
                         android:textColor="#000000"
                         android:textSize="12sp"
-                        android:textStyle="bold"
-                        />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/post_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Title"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="9dp"
                         tools:layout_editor_absoluteX="28dp"
                         tools:layout_editor_absoluteY="101dp"
-                        android:layout_marginTop="2dp"
                         android:maxLength="180"
                         android:maxLines="1"
                         android:textAppearance="?attr/textAppearanceHeadline5"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:paddingBottom="6dp"
+                        android:paddingBottom="4dp"
                         />
 
                         <TextView
@@ -106,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Description..."
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="9dp"
                             tools:layout_editor_absoluteX="28dp"
                             tools:layout_editor_absoluteY="101dp"
                             android:maxLines="1"
@@ -121,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/count_comment"
                             android:layout_marginStart="6dp"
-                             />
+                            android:layout_marginBottom="3dp" />
 
                     </LinearLayout>
 
@@ -131,46 +176,7 @@
                     android:orientation="vertical"
                     android:padding="2dp" >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:padding="2dp">
 
-                            <ImageView
-                                android:id="@+id/comment_post"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="4dp"
-                                android:src="@drawable/chat" />
-
-                            <ImageView
-                                android:id="@+id/like_post"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_marginStart="155dp"
-                                android:layout_marginTop="4dp"
-                                android:src="@drawable/ic_favorite_border_black_24dp"
-                                android:tag="NO" />
-
-                            <ImageView
-                                    android:id="@+id/join_post"
-                                    android:layout_width="28dp"
-                                    android:layout_height="28dp"
-                                    android:layout_marginStart="25dp"
-                                    android:layout_marginTop="4dp"
-                                    android:src="@drawable/join"
-                                    android:tag="NO" />
-
-                            <TextView
-                                android:id="@+id/join_like"
-                                android:layout_width="wrap_content"
-                                android:layout_height="28dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginTop="4dp" />
-
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

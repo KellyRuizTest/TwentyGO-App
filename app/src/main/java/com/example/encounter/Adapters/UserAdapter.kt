@@ -2,7 +2,6 @@ package com.example.encounter.Adapters
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.encounter.FolloworsActivity
+import com.example.encounter.MainActivity
 import com.example.encounter.Model.Users
 import com.example.encounter.R
+import com.example.encounter.fragment.PerfilFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -23,9 +24,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class UserAdapter(private var contexto : Context,
+class UserAdapter(private val contexto : Context,
                   private var listUsers : List<Users>,
-                  private var isFragment : Boolean = false
+                  private var isFragment : Boolean
                   ) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
@@ -67,7 +68,6 @@ class UserAdapter(private var contexto : Context,
                                 }
                             }
                         }
-
                 }
             } else {
                 firebaseUser?.uid.let { it1 ->
@@ -92,13 +92,17 @@ class UserAdapter(private var contexto : Context,
         }
 
         holder.cardView.setOnClickListener {
-
-            val intent_touser = Intent(contexto, FolloworsActivity::class.java).apply {
-                putExtra("UserID", user.getPid())
+            // I have to send ID because I will use same Profile Fragment to show any user
+            if (isFragment){
+                val send_id = contexto.getSharedPreferences("ID", Context.MODE_PRIVATE).edit()
+                send_id.putString("userID", user.getPid())
+                send_id.apply()
+                (contexto as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.content_fragment, PerfilFragment()).commit()
+            } else {
+                val intent = Intent(contexto, MainActivity::class.java)
+                contexto.startActivity(intent)
             }
-            contexto.startActivity(intent_touser)
         }
-
     }
 
     class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -124,8 +128,14 @@ class UserAdapter(private var contexto : Context,
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.child(auxUser).exists()) {
 
-                    Log.i("What", "<------What is "+ dataSnapshot.child(auxUser)+"--------------->")
-                    followButton.text = "Following"
+                    println("<======================================================================>")
+                    println(auxUser)
+                    println(firebaseUser!!.uid)
+                    println("<======================================================================>")
+                    if (dataSnapshot.child(auxUser).toString() == firebaseUser!!.uid)
+                    { followButton.visibility = View.GONE }
+                    else{ followButton.text = "Following" }
+
                 } else {
                     followButton.text = "Follow"
                 }

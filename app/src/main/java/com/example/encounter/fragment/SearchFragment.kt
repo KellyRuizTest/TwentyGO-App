@@ -1,5 +1,6 @@
 package com.example.encounter.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.encounter.Adapters.UserAdapter
 import com.example.encounter.Model.Users
 import com.example.encounter.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -38,6 +41,7 @@ class SearchFragment : Fragment() {
     private var recyclerView : RecyclerView? = null
     private var userAdapter : UserAdapter? = null
     private var listUser : MutableList<Users>? = null
+    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +51,14 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(  inflater: LayoutInflater,
+                                container: ViewGroup?,
+                                savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        // add view: View
+        val view: View = inflater.inflate(R.layout.fragment_search, container, false)
 
+        val activity = getActivity() as Context
         recyclerView = view.findViewById(R.id.recycler_search_users)
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = LinearLayoutManager(context)
@@ -91,7 +96,12 @@ class SearchFragment : Fragment() {
                     for(snapshot in dataSnapshot.children){
                         val userSnapshot = snapshot.getValue(Users::class.java)
                         if (userSnapshot != null){
-                            listUser?.add(userSnapshot)
+                            if (userSnapshot.getPid() == firebaseUser!!.uid){
+                                println("Im the same user, so I dont find it")
+                            }else{
+                                listUser?.add(userSnapshot)
+                            }
+
                         }
                     }
                 }
