@@ -35,6 +35,7 @@
                     android:layout_marginBottom="12dp"
                     android:src="@drawable/ic_baseline_search_24"
                     android:text="username"
+                    android:fontFamily="@font/convergence"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 

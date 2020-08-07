@@ -1,7 +1,6 @@
 package com.example.encounter.Adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,12 @@ import androidx.annotation.NonNull
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.encounter.MainActivity
+import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
 import com.example.encounter.R
+import com.example.encounter.fragment.HomeFragment
 import com.example.encounter.fragment.PerfilFragment
+import com.example.encounter.fragment.PerfilUFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -23,6 +24,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.show_users.view.*
+import kotlinx.android.synthetic.main.test_layout.view.*
 
 class UserAdapter(private val contexto : Context,
                   private var listUsers : List<Users>,
@@ -30,10 +33,11 @@ class UserAdapter(private val contexto : Context,
                   ) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+   // lateinit var itemClickListener: OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ViewHolder {
         val view = LayoutInflater.from(contexto).inflate(R.layout.show_users, parent, false)
-        return UserAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -94,13 +98,11 @@ class UserAdapter(private val contexto : Context,
         holder.cardView.setOnClickListener {
             // I have to send ID because I will use same Profile Fragment to show any user
             if (isFragment){
-                val send_id = contexto.getSharedPreferences("ID", Context.MODE_PRIVATE).edit()
-                send_id.putString("userID", user.getPid())
-                send_id.apply()
-                (contexto as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.content_fragment, PerfilFragment()).commit()
-            } else {
-                val intent = Intent(contexto, MainActivity::class.java)
-                contexto.startActivity(intent)
+
+                    val send_id = contexto.getSharedPreferences("ID", Context.MODE_PRIVATE).edit()
+                    send_id.putString("userID", user.getPid())
+                    send_id.apply()
+                    (contexto as FragmentActivity).supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.content_fragment, PerfilFragment()).commit()
             }
         }
     }
@@ -115,7 +117,21 @@ class UserAdapter(private val contexto : Context,
 
         var cardView : CardView = itemView.findViewById(R.id.cardview_show_contact)
 
+        /*init {
+            itemView.show_layout.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View) = itemClickListener.onItemClick(itemView, adapterPosition, listUsers[position])*/
+
     }
+
+    /*interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int, id: Users)
+    }
+
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }*/
 
     private fun isFollowing(followButton : Button, auxUser : String) {
 
@@ -128,10 +144,6 @@ class UserAdapter(private val contexto : Context,
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.child(auxUser).exists()) {
 
-                    println("<======================================================================>")
-                    println(auxUser)
-                    println(firebaseUser!!.uid)
-                    println("<======================================================================>")
                     if (dataSnapshot.child(auxUser).toString() == firebaseUser!!.uid)
                     { followButton.visibility = View.GONE }
                     else{ followButton.text = "Following" }

@@ -51,7 +51,7 @@ class PostDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_post_detail, container, false)
 
-        val preferences = context?.getSharedPreferences("SENDING", Context.MODE_PRIVATE)
+        val preferences = context?.getSharedPreferences("ID", Context.MODE_PRIVATE)
         if (preferences != null){
             postId = preferences.getString("postId", "none")
         }

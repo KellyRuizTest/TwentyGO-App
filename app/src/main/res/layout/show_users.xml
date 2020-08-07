@@ -18,7 +18,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:id="@+id/show_layout"
+        >
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -30,8 +32,8 @@
             android:paddingStart="2dp"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
-            app:civ_border_color="@color/colorPrimaryDark"
-            app:civ_border_width="1dp"
+            app:civ_border_color="#c8e6c9"
+            app:civ_border_width="0.7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
@@ -46,6 +48,7 @@
             android:layout_toEndOf="@+id/show_contact_image"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textStyle="bold"
+            android:fontFamily="@font/lato"
             app:layout_constraintLeft_toRightOf="@+id/show_contact_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="John Doe" />
@@ -57,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintLeft_toRightOf="@+id/show_contact_name"

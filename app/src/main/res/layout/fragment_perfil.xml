@@ -33,6 +33,7 @@
                     android:layout_marginBottom="15dp"
                     android:src="@drawable/ic_baseline_search_24"
                     android:text="username"
+                    android:fontFamily="@font/convergence"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -41,7 +42,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="3dp"
+                    android:layout_marginRight="6dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_baseline_exit_to_app_24"
                     />
@@ -168,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/lato"
                 android:text="Hello"
                 android:textColor="#000000"
                 android:textSize="16sp" />
@@ -176,6 +177,7 @@
                 android:id="@+id/description_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_marginStart="8dp"
                 android:text="Hello"
                 />
@@ -193,7 +195,7 @@
                 android:id="@+id/edit_profile"
                 android:text="Edit Profile"
                 style="@style/MyDesign"
-                android:background="@drawable/borde_round_follow"
+                android:background="@drawable/borde_redondo_light"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
                 android:layout_marginTop="8dp"
@@ -205,22 +207,22 @@
                 android:id="@+id/following_button"
                 android:layout_width="190dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginRight="6dp"
-                android:background="@drawable/borde_round_unfollow"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/borde_redondo_light"
                 android:padding="2dp"
                 android:text="Follow"
-                android:textColor="#070909" />
+                android:textColor="#070909"
+                />
 
             <Button
                 android:id="@+id/mensaje"
                 android:layout_width="181dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="201dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
                 android:background="@drawable/borde_round_unfollow"
                 android:padding="2dp"
                 android:text="Message"

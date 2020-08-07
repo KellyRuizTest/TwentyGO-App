@@ -7,6 +7,7 @@
         <item name="colorPrimary">#243743</item>
         <item name="colorPrimaryDark">#28b78d</item>
         <item name="colorAccent">#5ce1e6</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="MyDesign" parent="Theme.MaterialComponents.Light.NoActionBar">

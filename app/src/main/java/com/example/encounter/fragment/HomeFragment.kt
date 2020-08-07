@@ -1,13 +1,20 @@
 package com.example.encounter.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.util.Pair as UtilPair
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.encounter.Adapters.PostAdapter
+import com.example.encounter.DetailActivity
 import com.example.encounter.Model.Post
 import com.example.encounter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +22,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.test_layout.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +55,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+
         recyclerView = view.findViewById(R.id.recycler_view_home)
 
         val linearLayoutManager = LinearLayoutManager(context)
@@ -57,6 +66,7 @@ class HomeFragment : Fragment() {
         postList = ArrayList()
         postAdapter = context?.let { PostAdapter(it, postList as ArrayList<Post>) }
         recyclerView?.adapter = postAdapter
+        postAdapter?.setOnItemClickListener(onItemClickListener)
 
        checkFollowing()
 
@@ -83,6 +93,26 @@ class HomeFragment : Fragment() {
             }
     }
 
+
+    private val onItemClickListener = object : PostAdapter.OnItemClickListener {
+        override fun onItemClick(view: View, position: Int, idPost: Post) {
+           //Toast.makeText(context, "Clicked " + position + idPost.getPid()+ "", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(context, DetailActivity::class.java)
+
+
+            val placeImage = view.findViewById<ImageView>(R.id.image_post_from)
+            val placeNameHolder = view.findViewById<LinearLayout>(R.id.placeHolder)
+
+            //val imageViewPair = Pair.create<placeImage as View, "tImage")
+
+            val options =
+                activity?.let { ActivityOptionsCompat.makeSceneTransitionAnimation(it, UtilPair.create(image_post_from, "tbImage")) }
+            intent.putExtra("pid", idPost.getPid())
+
+            context?.startActivity(intent, options?.toBundle())
+        }
+    }
 
     private fun checkFollowing(){
 

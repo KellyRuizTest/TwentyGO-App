@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -43,7 +44,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
                     android:foregroundGravity="center"
-                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_color="#c8e6c9"
                     app:civ_border_width="1dp"
                     />
 
@@ -63,25 +64,30 @@
                         android:backgroundTint="@color/colorAccent"
                         android:gravity="top"
                         android:hint="Post Title"
-                        android:maxLength="180"
+                        android:fontFamily="@font/convergence"
+                        android:maxLength="20"
                         android:maxLines="1"
+                        android:layout_marginEnd="4dp"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="#000000"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/edit_description_post"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
                         android:background="@android:color/transparent"
                         android:backgroundTint="@color/colorAccent"
                         android:gravity="top"
                         android:hint="Write description..."
-                        android:maxLength="380"
+                        android:fontFamily="sans-serif-condensed"
+                        android:maxLength="180"
                         android:maxLines="3"
                         android:textSize="12sp"
+                        android:layout_marginEnd="6dp"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary" />
 
@@ -130,6 +136,7 @@
                             android:background="@drawable/ic_calendar"
                             />
 
+
                         <TextView
                             android:id="@+id/location_encounter"
                             android:layout_width="wrap_content"
@@ -140,9 +147,10 @@
                             android:layout_marginTop="12dp"
                             android:layout_marginEnd="46dp"
                             android:hint="Place"
+                            android:textSize="13sp"
                             />
 
-                        <TextView
+                       <TextView
                             android:id="@+id/date_pick"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -150,9 +158,10 @@
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="13dp"
                             android:hint="Date"
-                            android:textSize="14sp" />
+                            android:textSize="13sp" />
 
                     </RelativeLayout>
+
                 </LinearLayout>
 
 
@@ -176,10 +185,10 @@
         <Button
             android:id="@+id/button_postingclick"
             android:layout_width="103dp"
-            android:layout_height="33dp"
+            android:layout_height="30dp"
             android:layout_marginTop="23dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/borde_redondo"
+            android:background="@drawable/borde_redondo_tweet"
             android:text="Post"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"

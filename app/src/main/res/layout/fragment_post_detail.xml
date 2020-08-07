@@ -29,6 +29,7 @@
             android:layout_marginBottom="2dp"
             android:src="@drawable/ic_baseline_search_24"
             android:text="Post Details"
+            android:fontFamily="@font/convergence"
             android:textColor="#000000"
             android:textSize="18sp" />
 

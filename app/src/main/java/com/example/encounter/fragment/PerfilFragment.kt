@@ -49,9 +49,9 @@ class PerfilFragment : Fragment() {
     private var param2: String? = null
     lateinit var firebaseUser: FirebaseUser
 
-    var postsList : List<Post>? = null
-    var mypostAdater : MyPostAdapter? = null
-    lateinit var userID : String
+    var postsList: List<Post>? = null
+    var mypostAdater: MyPostAdapter? = null
+    lateinit var userID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +66,7 @@ class PerfilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_perfil, container, false)
+        val view = inflater.inflate(R.layout.fragment_perfil, container, false)
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
 
@@ -74,21 +74,61 @@ class PerfilFragment : Fragment() {
         if (pref != null) {
             userID = pref.getString("userID", "none").toString()
 
-            if(userID.equals("none")){
+            if (userID.equals("none")) {
                 userID = firebaseUser.uid.toString()
             }
         }
 
-        if (userID != firebaseUser.uid){
+        if (userID != firebaseUser.uid) {
             view.edit_profile.visibility = View.GONE
             view.logout_btn.visibility = View.INVISIBLE
             checkFollowingStatusButton()
+
         } else {
             view.following_button.visibility = View.GONE
             view.mensaje.visibility = View.GONE
         }
 
-        view.edit_profile.setOnClickListener { startActivity(Intent(context, SettingActivity::class.java)) }
+        view.edit_profile.setOnClickListener {
+            startActivity(
+                Intent(
+                    context,
+                    SettingActivity::class.java
+                )
+            )
+        }
+
+        view.following_button.setOnClickListener {
+
+            if (view?.following_button?.text.toString() == "Follow") {
+                FirebaseDatabase.getInstance().reference.child("Follow").child(firebaseUser.uid)
+                    .child("following").child(userID).setValue(true)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            FirebaseDatabase.getInstance().reference.child("Follow")
+                                .child(userID)
+                                .child("followers").child(firebaseUser.uid)
+                                .setValue(true)
+                        }
+                    }
+                view?.following_button?.text = "Following"
+            } else {
+
+                FirebaseDatabase.getInstance().reference.child("Follow").child(firebaseUser.uid)
+                    .child("following").child(userID).removeValue()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            FirebaseDatabase.getInstance().reference.child("Follow")
+                                .child(userID)
+                                .child("followers").child(firebaseUser.uid)
+                                .removeValue()
+
+                        }
+                    }
+                view?.following_button?.text = "Follow"
+            }
+
+        }
 
         view.logout_btn.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -97,11 +137,11 @@ class PerfilFragment : Fragment() {
             startActivity(intentToFinish)
         }
 
-        var recyclerViewPostimages : RecyclerView
+        var recyclerViewPostimages: RecyclerView
         recyclerViewPostimages = view.findViewById(R.id.recycler_view_own_post)
         recyclerViewPostimages.setHasFixedSize(true)
 
-        val linearLayoutManager : LinearLayoutManager = GridLayoutManager(context,3)
+        val linearLayoutManager: LinearLayoutManager = GridLayoutManager(context, 3)
         recyclerViewPostimages.layoutManager = linearLayoutManager
 
         postsList = ArrayList()
@@ -151,17 +191,18 @@ class PerfilFragment : Fragment() {
             }
     }
 
-    private fun getFollowersCount(){
+    private fun getFollowersCount() {
         val followersRef = FirebaseDatabase.getInstance().reference
-                .child("Follow").child(userID!!).child("followers")
+            .child("Follow").child(userID!!).child("followers")
 
 
         followersRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
+
             override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()){
+                if (p0.exists()) {
                     view?.followers?.text = p0.childrenCount.toString()
                 }
             }
@@ -176,11 +217,11 @@ class PerfilFragment : Fragment() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.child(userID).exists()) {
-                    following_button.text = "Following"
-                    following_button.setBackgroundColor(Color.WHITE)
-                    following_button.setBackgroundResource(R.drawable.borde_round_follow)
+                    view?.following_button?.text = "Following"
+                    view?.following_button?.setBackgroundColor(Color.WHITE)
+                    view?.following_button?.setBackgroundResource(R.drawable.borde_redondo_light)
                 } else {
-                    following_button.text = "Follow"
+                    view?.following_button?.text = "Follow"
                 }
             }
 
@@ -271,7 +312,9 @@ class PerfilFragment : Fragment() {
                             count++
                         }
                     }
-                    posts.text = ""+count+""
+                    if (count > 0){ posts.text = ""+count+"" } else {
+                        view?.posts?.text = ""+0+""
+                    }
                 }
             }
         })

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/info_user"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/avatar_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="8dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/usermale"
+            app:civ_border_color="#c8e6c9"
+            app:civ_border_width="0.7dp" />
+
+        <TextView
+            android:id="@+id/name_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="John Doe" />
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:layout_below="@+id/info_user"
+        android:id="@+id/placeCard"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="1dp"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardElevation="0dp">
+
+        <ImageView
+            android:id="@+id/image_post_detail"
+            android:transitionName="tImage"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Used for the ripple effect on touch -->
+        <LinearLayout
+            android:id="@+id/placeHolder"
+            android:transitionName="tNameHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/placeNameHolder"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/concert_one"
+                android:gravity="start"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#c8e6c9" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/layout_description"
+        android:layout_below="@+id/placeCard">
+
+        <TextView
+            android:id="@+id/post_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description..."
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="9dp"
+            android:fontFamily="sans-serif-condensed"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="8dp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ScrolltoComments"
+        android:layout_below="@+id/layout_description">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_comments"
+            android:layout_marginBottom="6dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
+
+</RelativeLayout>
+
+

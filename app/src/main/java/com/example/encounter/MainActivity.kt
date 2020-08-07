@@ -1,8 +1,10 @@
 package com.example.encounter
 
 import android.content.Intent
+import android.nfc.cardemulation.HostNfcFService
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import androidx.fragment.app.Fragment
 import com.example.encounter.fragment.HomeFragment
 import com.example.encounter.fragment.NotifyFragment

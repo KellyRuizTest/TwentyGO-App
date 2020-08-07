@@ -10,6 +10,8 @@ import com.example.encounter.Adapters.CommentAdapter
 import com.example.encounter.Model.Comments
 import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.make
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -35,11 +37,8 @@ class CommentActivity : AppCompatActivity() {
         idpost = intent.getStringExtra("pid")
         commenter = intent.getStringExtra("user")
 
-        println("<==================What is Commenter=======================>")
-        println("<==================What is idPost==========================>")
         println(idpost)
         println(commenter)
-        println("<==========================================================>")
 
         val recyclerView : RecyclerView = findViewById(R.id.recycler_comments)
         val linearLayoutManager = LinearLayoutManager(this)
@@ -56,7 +55,11 @@ class CommentActivity : AppCompatActivity() {
 
         comment_button.setOnClickListener( View.OnClickListener {
             if (add_comment!!.text.toString() == ""){
-                Toast.makeText(this@CommentActivity, "Text is empty.", Toast.LENGTH_SHORT).show()
+
+                val snackbar: Snackbar = make(comment_button, "Text is empty", Snackbar.LENGTH_SHORT)
+                snackbar.setAnchorView(bootom_appbar)
+                snackbar.show()
+             //   Toast.makeText(this@CommentActivity, "Text is empty.", Toast.LENGTH_SHORT).show()
             }else{
                 addComment()
             }

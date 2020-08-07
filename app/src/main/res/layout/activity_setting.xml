@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/convergence"
                 android:gravity="center"
                 android:layout_centerVertical="true"
                 android:text="Edit Profile"
@@ -71,6 +71,7 @@
         android:layout_marginEnd="27dp"
         android:ems="10"
         android:hint="Name"
+        android:fontFamily="@font/lato"
         android:inputType="textPersonName" />
 
     <EditText
@@ -85,6 +86,7 @@
         android:layout_marginEnd="27dp"
         android:ems="10"
         android:hint="Username"
+        android:fontFamily="@font/lato"
         android:inputType="textPersonName" />
 
     <EditText
@@ -100,6 +102,7 @@
         android:layout_marginBottom="35dp"
         android:ems="10"
         android:hint="Bio"
+        android:fontFamily="@font/lato"
         android:inputType="textPersonName" />
 
 
@@ -110,6 +113,7 @@
         android:layout_marginTop="6dp"
         android:text="Profile Information"
         android:layout_marginStart="21dp"
+        android:fontFamily="@font/convergence"
         android:textStyle="bold"
         android:id="@+id/profile_info_textview"
         />
@@ -131,6 +135,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginEnd="29dp"
         android:hint="Email"
+        android:fontFamily="@font/lato"
         android:focusable="false"
         android:inputType="none" />
 
@@ -144,6 +149,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginEnd="29dp"
         android:hint="Phone"
+        android:fontFamily="@font/lato"
         android:inputType="none" />
 
     <EditText
@@ -156,6 +162,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginEnd="29dp"
         android:hint="Gender"
+        android:fontFamily="@font/lato"
         android:inputType="textCapCharacters" />
 
     <Button
@@ -165,11 +172,12 @@
         android:layout_below="@+id/edit_sex"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="27dp"
-        android:background="@drawable/borde_redondo"
+        android:background="@drawable/borde_redondo_light"
         android:text="Save"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
+        android:fontFamily="@font/convergence"
         android:textStyle="bold" />
 
 

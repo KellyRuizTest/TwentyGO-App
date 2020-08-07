@@ -14,19 +14,20 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="18dp"
         android:layout_marginTop="122dp"
-        android:text="Sign In Encounter"
+        android:text="Sign In"
+        android:fontFamily="@font/convergence"
         android:textColor="@android:color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="127dp"
-        android:layout_height="76dp"
+        android:layout_width="137dp"
+        android:layout_height="86dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:src="@drawable/encounter"
+        android:src="@drawable/logitot20"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,6 +41,7 @@
         android:layout_marginTop="186dp"
         android:layout_marginEnd="41dp"
         android:hint="Email or username"
+        android:fontFamily="@font/lato"
         app:startIconDrawable="@drawable/ic_baseline_email_24"
         app:endIconMode="clear_text"
         app:boxStrokeColor="#618B9E"
@@ -50,6 +52,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_email_login"
             android:inputType="textEmailAddress"
+            android:fontFamily="@font/lato"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,6 +68,7 @@
         android:layout_marginEnd="43dp"
         android:ems="10"
         android:hint="Password"
+        android:fontFamily="@font/lato"
         android:inputType="textPassword"
         app:endIconMode="password_toggle"
         >
@@ -86,6 +90,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="296dp"
         android:layout_marginEnd="44dp"
+        android:fontFamily="@font/lato"
         android:text="forgot your password?" />
 
     <Button
@@ -96,9 +101,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="342dp"
         android:layout_marginEnd="-35dp"
-        android:background="@drawable/borde_redondo"
+        android:background="@drawable/borde_redondo_light"
         android:text="Login"
         android:textAllCaps="false"
+        android:fontFamily="@font/convergence"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -111,9 +117,10 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="37dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/borde_redondo"
+        android:background="@drawable/borde_redondo_light"
         android:text="Need A New Account?"
         android:textAllCaps="false"
+        android:fontFamily="@font/convergence"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />

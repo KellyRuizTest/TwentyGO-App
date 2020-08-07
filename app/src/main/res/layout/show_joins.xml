@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview_show_contact"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="4dp"
+    android:layout_margin="2dp"
+    app:cardUseCompatPadding="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_marginRight="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/post_image_join"
+            android:layout_width="94dp"
+            android:layout_height="94dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            card_view:cardCornerRadius="6dp"
+            card_view:cardElevation="0dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/image_post_from"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+
+                android:scaleType="centerCrop"
+                android:transitionName="tImage" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/title_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/convergence"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/post_image_join"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/user_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintLeft_toRightOf="@+id/title_join"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="user" />
+
+        <TextView
+            android:id="@+id/description_joins"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/post_image_join"
+            app:layout_constraintTop_toBottomOf="@+id/title_join" />
+
+        <TextView
+            android:id="@+id/count_joins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintLeft_toRightOf="@+id/join_count_icon"
+            app:layout_constraintTop_toBottomOf="@+id/description_joins"
+            android:hint="count" />
+
+        <ImageView
+            android:id="@+id/join_count_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintLeft_toRightOf="@+id/post_image_join"
+            app:layout_constraintTop_toBottomOf="@+id/description_joins"
+            android:src="@drawable/ic_baseline_person_outline_24"
+            android:tag="NO" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:hint="DD/MM/YYY"
+            android:textColor="#94e4a5"
+            android:fontFamily="@font/concert_one"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_joins" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

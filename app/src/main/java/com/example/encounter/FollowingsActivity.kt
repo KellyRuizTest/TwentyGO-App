@@ -1,14 +1,25 @@
 package com.example.encounter
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.encounter.Adapters.PostAdapter
 import com.example.encounter.Adapters.UserAdapter
+import com.example.encounter.Model.Post
 import com.example.encounter.Model.Users
 import com.example.encounter.fragment.PerfilFragment
 import com.example.encounter.fragment.SearchFragment
@@ -20,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_followings.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import kotlinx.android.synthetic.main.test_layout.*
 
 class FollowingsActivity : AppCompatActivity() {
 
@@ -39,7 +51,6 @@ class FollowingsActivity : AppCompatActivity() {
         typefrom = intent.getStringExtra("type")
         idPost_idUser = intent.getStringExtra("pid")
 
-
         recyclerView = findViewById(R.id.recycler_followers)
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = LinearLayoutManager(this)
@@ -47,6 +58,7 @@ class FollowingsActivity : AppCompatActivity() {
         listUser = ArrayList()
         userAdapter = UserAdapter(this, listUser as ArrayList<Users>, false)
         recyclerView?.adapter = userAdapter
+
 
         idList = ArrayList()
 
@@ -61,11 +73,32 @@ class FollowingsActivity : AppCompatActivity() {
                 id_profile_follower!!.text = "Followers" }
 
             if (typefrom.equals("likes")){
-                id_profile_follower!!.text = "Likes"
                 retrieveLikes(idPost_idUser!!)
+                id_profile_follower!!.text = "Likes"
             }
         }
     }
+
+   /* private val onItemClickListener= object : UserAdapter.OnItemClickListener {
+        override fun onItemClick(view: View, position: Int, idUser: Users) {
+            Toast.makeText(applicationContext, "Clicked " + position + idUser.getPid()+ "", Toast.LENGTH_SHORT).show()
+            //(contexto as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.content_fragment, PerfilFragment()).commit()
+/*
+        val fragmentTrans = supportFragmentManager.beginTransaction()
+        fragmentTrans.replace(R.id.content_fragment, fragment).commit()
+            val intent = Intent(context, DetailActivity::class.java)
+            val placeImage = view.findViewById<ImageView>(R.id.image_post_from)
+            val placeNameHolder = view.findViewById<LinearLayout>(R.id.placeHolder)
+
+            //val imageViewPair = Pair.create<placeImage as View, "tImage")
+
+            val options =
+                activity?.let { ActivityOptionsCompat.makeSceneTransitionAnimation(it, Pair.create(image_post_from, "tbImage")) }
+            intent.putExtra("pid", idPost.getPid())
+
+            context?.startActivity(intent, options?.toBundle())*/
+        }
+    }*/
 
     private fun retrieveLikes(id: String) {
 

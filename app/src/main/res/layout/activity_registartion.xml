@@ -24,6 +24,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_name"
+            android:fontFamily="@font/lato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -41,6 +42,7 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="18sp"
+        android:fontFamily="@font/convergence"
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,6 +63,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_id"
+            android:fontFamily="@font/lato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -85,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:fontFamily="@font/lato"
             />
 
 
@@ -109,19 +113,20 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_email"
             android:inputType="textEmailAddress"
+            android:fontFamily="@font/lato"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="81dp"
+        android:layout_width="88dp"
         android:layout_height="57dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="144dp"
         android:layout_marginTop="72dp"
-        android:src="@drawable/encounter"
+        android:src="@drawable/logitot20"
         />
 
     <Button
@@ -132,8 +137,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="405dp"
         android:layout_marginEnd="27dp"
-        android:background="@drawable/borde_redondo"
+        android:background="@drawable/borde_redondo_light"
         android:text="Register"
+        android:fontFamily="@font/convergence"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"

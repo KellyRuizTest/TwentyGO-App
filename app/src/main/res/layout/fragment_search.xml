@@ -40,10 +40,10 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
                     android:id="@+id/search_user_editext"
-                    android:hint="Search a friend by username..."
-
-                    />
+                    android:layout_gravity="bottom"
+                    android:hint="Search a friend by username..." />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
