@@ -45,9 +45,8 @@ class MyPostAdapter(private val Contexto: Context, private val listPost : List<P
             /*val manager = (Contexto as FragmentActivity).supportFragmentManager
             manager.findFragmentById(fragment_perfil)*/
 
-            (Contexto as FragmentActivity).supportFragmentManager.beginTransaction()
+            (Contexto as FragmentActivity).supportFragmentManager.beginTransaction().addToBackStack(null)
                 .replace(R.id.content_fragment, PostDetailFragment())
-                .addToBackStack(fragment_home.toString())
                 .commit()
         }
     }

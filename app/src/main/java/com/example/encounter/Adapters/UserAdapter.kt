@@ -16,7 +16,6 @@ import com.example.encounter.Model.Users
 import com.example.encounter.R
 import com.example.encounter.fragment.HomeFragment
 import com.example.encounter.fragment.PerfilFragment
-import com.example.encounter.fragment.PerfilUFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot

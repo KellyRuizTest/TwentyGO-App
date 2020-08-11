@@ -5,20 +5,30 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.WindowManager
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
+import androidx.transition.Fade
+import androidx.transition.Transition
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login_new.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        setContentView(R.layout.activity_login_new)
+
+        val fadeIn = Fade(Fade.IN)
+        window.enterTransition
 
         registration_button.setOnClickListener {
             startActivity(Intent(Intent(this, RegistrationActivity::class.java))) }
 
         login_account.setOnClickListener {LoginUser() }
+
+        forget_password_text.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswrod::class.java))
+        }
     }
 
     private fun LoginUser(){

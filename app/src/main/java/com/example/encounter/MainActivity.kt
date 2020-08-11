@@ -1,10 +1,8 @@
 package com.example.encounter
 
 import android.content.Intent
-import android.nfc.cardemulation.HostNfcFService
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import androidx.fragment.app.Fragment
 import com.example.encounter.fragment.HomeFragment
 import com.example.encounter.fragment.NotifyFragment
@@ -29,6 +27,8 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true }
 
             R.id.navigation_notification -> {
+              //  getSupportFragmentManager().popBackStackImmediate()
+                //getSupportFragmentManager().beginTransaction().replace(R.id.home_activity_container, fragmentInstance).addToBackStack(null).commit();
                 FragmentFocused(NotifyFragment())
             }
             R.id.navigation_profile -> {
@@ -51,8 +51,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun FragmentFocused(fragment: Fragment){
-        val fragmentTrans = supportFragmentManager.beginTransaction()
+        val fragmentTrans = supportFragmentManager.beginTransaction().addToBackStack(null)
         fragmentTrans.replace(R.id.content_fragment, fragment).commit()
     }
+
+
 
 }

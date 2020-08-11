@@ -162,7 +162,7 @@ class SettingActivity : AppCompatActivity() {
             else -> {
 
                 val progressDialog = ProgressDialog(this)
-                progressDialog.setTitle("Add new Post")
+                progressDialog.setTitle("Updating Profile picture")
                 progressDialog.setMessage("Please wait")
                 progressDialog.show()
 

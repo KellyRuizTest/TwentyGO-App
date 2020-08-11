@@ -277,7 +277,7 @@ class PerfilFragment : Fragment() {
 
     private fun userCompleteInfo(){
 
-        val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(userID!!)
+        val userInfo = FirebaseDatabase.getInstance().reference.child("Users").child(userID)
         userInfo.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
@@ -286,10 +286,10 @@ class PerfilFragment : Fragment() {
 
                 if (p0.exists()){
                     val user = p0.getValue<Users>(Users::class.java)
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale).into(view?.profile_image)
-                    view?.name_profile?.text = user!!.getName()
-                    view?.description_profile?.text = user!!.getBio()
-                    view?.id_profile_frag?.text = user!!.getUsername()
+                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.usermale).into(view!!.profile_image)
+                    view?.name_profile?.text = user.getName()
+                    view?.description_profile?.text = user.getBio()
+                    view?.id_profile_frag?.text = user.getUsername()
                 }
             }
         })

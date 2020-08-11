@@ -7,28 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Text"
-        android:layout_width="326dp"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="98dp"
+        android:layout_height="67dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="165dp"
-        android:layout_marginEnd="27dp"
-        android:ems="10"
-        android:hint="Name"
-        app:endIconMode="clear_text"
-        android:inputType="textPersonName" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_name"
-            android:fontFamily="@font/lato"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/logitot20" />
 
     <TextView
         android:id="@+id/textView"
@@ -45,103 +32,130 @@
         android:fontFamily="@font/convergence"
         android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="326dp"
+    <LinearLayout
+        android:id="@+id/linearTextinputs"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="217dp"
-        android:layout_marginEnd="27dp"
-        android:ems="10"
-        android:hint="Username"
-        app:counterEnabled="true"
-        app:counterMaxLength="10"
-        app:endIconMode="clear_text"
-        android:inputType="textPersonName">
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_id"
-            android:fontFamily="@font/lato"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="327dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="331dp"
-        android:layout_marginEnd="26dp"
-        android:ems="10"
-        android:hint="Password"
-        app:endIconMode="password_toggle"
-         >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_pass"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:fontFamily="@font/lato"
-            />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="27dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/fullname_regis">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="327dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="275dp"
-        android:layout_marginEnd="29dp"
-        android:ems="10"
-        android:hint="Email"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_baseline_email_24" >
-
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edit_email"
-            android:inputType="textEmailAddress"
-            android:fontFamily="@font/lato"
-            />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="27dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/person_regis">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="88dp"
-        android:layout_height="57dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="72dp"
-        android:src="@drawable/logitot20"
-        />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="27dp"
+            android:ems="10"
+            android:hint="Email"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_baseline_email_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="27dp"
+            android:ems="10"
+            android:hint="Password"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/pasword_regist">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <android.widget.Button
         android:id="@+id/register_account_btn"
         android:layout_width="152dp"
-        android:layout_height="36dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="37dp"
+        android:layout_below="@+id/linearTextinputs"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="405dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="27dp"
         android:background="@drawable/borde_redondo_light"
-        android:text="Register"
         android:fontFamily="@font/convergence"
+        android:text="Register"
         android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
+        android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
 
