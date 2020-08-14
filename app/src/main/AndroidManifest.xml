@@ -28,9 +28,6 @@
             android:name="com.encounter.twenty.CommentActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.encounter.twenty.EncounterActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.encounter.twenty.PostActivity"
             android:screenOrientation="portrait" />
         <activity
