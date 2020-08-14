@@ -1,30 +1,32 @@
-# Encounter App
+# Twenty20 App
 
-This a simple social App to conect people who wants to be part of Charity with others,
+This a simple social App to conect people who wants to be part of Events with others,
 All you have to do is a post a new Encounter with description what do you want to do or support.
 
-People read these post and joined thru likes.
-This is a Encounter.
+People read these post and they can likes or joined thru "joins".
+Connect with friends, share what you’re up to, or see what's new from others all over the world. 
+Explore our community where you can feel free to be yourself and share everything from your daily moments to life's highlights.
 
-// Not finished yet (I will be updating this code, but the structure is almost done)
+SHARE
+Express Yourself and Connect With Friends
+
+• Add photos to your Feed and bring them to life with fun creative tools.
+• Message your friends. Start fun conversations about what you see on Feed.
+• Post photos and videos to your feed that you want to show on your profile.
+
+DISCOVER
+• Follow friends and watch their feed.
+• Watch breaking news, original Shows, made just for your phone.
+
+JOIN
+• After discover some interesting posts from your friends you can join them
+• Ask for more info, comment and join to your friends in its events.
 
 <h2> Project </h2>
 
-Project Part of 30 days of Kotlin.
-
-<h2> Lessons & Learninngs </h2
-
-It was my first touch with Kotlin, 
-I really appreciate this new Modern programming Language strengths like Expressiveness (lambdas,
-coroutines, named parameters to Android Libraries 
-in some cases I was tempted to use Java code in the project which is another strength
-ok Kotlin Interoperability.
-
-
-however there is a long way to Android Development in Kotlin 
 
 <h2> TODO </h2>
 
-- Need to add post joined
-- Define method to qualify users that post Encounters
-- Polish app
+- Define method to qualify users that post Encounters.
+- Send notifications about the events coming.
+- Add filters to the pictures.
