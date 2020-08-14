@@ -43,6 +43,8 @@
                     android:backgroundTint="@android:color/transparent"
                     android:id="@+id/search_user_editext"
                     android:layout_gravity="bottom"
+                    android:maxLength="40"
+                    android:maxLines="1"
                     android:hint="Search a friend by username..." />
 
             </LinearLayout>

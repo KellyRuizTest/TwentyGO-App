@@ -32,7 +32,7 @@
             android:paddingStart="2dp"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
-            app:civ_border_color="#c8e6c9"
+            app:civ_border_color="#90a4ae"
             app:civ_border_width="0.7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

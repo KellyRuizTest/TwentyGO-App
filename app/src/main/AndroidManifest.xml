@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.encounter">
+    package="com.encounter.twenty">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,31 +12,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewPassword"
+        <activity android:name="com.encounter.twenty.NewPassword"
             android:theme="@style/MyDesign"></activity>
-        <activity android:name=".VerifyEmail" />
+        <activity android:name="com.encounter.twenty.VerifyEmail" />
         <activity
-            android:name=".ForgotPasswrod"
+            android:name="com.encounter.twenty.ForgotPasswrod"
             android:theme="@style/MyDesign" />
         <activity
-            android:name=".DetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".FollowingsActivity" />
+            android:name="com.encounter.twenty.DetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDesign"
+            />
+        <activity android:name="com.encounter.twenty.FollowingsActivity" />
         <activity
-            android:name=".CommentActivity"
+            android:name="com.encounter.twenty.CommentActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".EncounterActivity"
+            android:name="com.encounter.twenty.EncounterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PostActivity"
+            android:name="com.encounter.twenty.PostActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name="com.encounter.twenty.RegistrationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.encounter.twenty.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -46,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.encounter.twenty.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign">
             <intent-filter>
@@ -56,10 +58,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingActivity"
+            android:name="com.encounter.twenty.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.encounter.twenty.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign"
             />

@@ -11,8 +11,8 @@
         android:id="@+id/info_user"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="4dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +22,7 @@
             android:layout_marginLeft="8dp"
             android:foregroundGravity="center"
             android:src="@drawable/usermale"
-            app:civ_border_color="#c8e6c9"
+            app:civ_border_color="#90a4ae"
             app:civ_border_width="0.7dp" />
 
         <TextView
@@ -38,6 +38,17 @@
             android:text="John Doe" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/remove_post"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="left"
+        android:visibility="invisible"
+        android:src="@drawable/ic_baseline_delete_24" />
 
     <com.google.android.material.card.MaterialCardView
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"

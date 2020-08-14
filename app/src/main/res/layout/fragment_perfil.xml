@@ -44,8 +44,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="6dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_exit_to_app_24"
-                    />
+                    android:src="@drawable/ic_baseline_exit_to_app_24" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
