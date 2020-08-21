@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.encounter.twenty">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.twenty.veinte"
+    android:versionCode="2"
+    android:versionName="2.0">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,30 +15,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.encounter.twenty.NewPassword"
-            android:theme="@style/MyDesign"></activity>
-        <activity android:name="com.encounter.twenty.VerifyEmail" />
         <activity
-            android:name="com.encounter.twenty.ForgotPasswrod"
+            android:name="com.twenty.veinte.NewPassword"
+            android:theme="@style/MyDesign" />
+        <activity android:name="com.twenty.veinte.VerifyEmail" />
+        <activity
+            android:name="com.twenty.veinte.ForgotPasswrod"
             android:theme="@style/MyDesign" />
         <activity
-            android:name="com.encounter.twenty.DetailActivity"
+            android:name="com.twenty.veinte.DetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign"
             />
-        <activity android:name="com.encounter.twenty.FollowingsActivity" />
+        <activity android:name="com.twenty.veinte.FollowingsActivity" />
         <activity
-            android:name="com.encounter.twenty.CommentActivity"
+            android:name="com.twenty.veinte.CommentActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.encounter.twenty.PostActivity"
+            android:name="com.twenty.veinte.PostActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.encounter.twenty.RegistrationActivity"
+            android:name="com.twenty.veinte.RegistrationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign" />
         <activity
-            android:name="com.encounter.twenty.SplashScreen"
+            android:name="com.twenty.veinte.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -44,8 +48,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name="com.encounter.twenty.LoginActivity"
+            android:name="com.twenty.veinte.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign">
             <intent-filter>
@@ -55,10 +60,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.encounter.twenty.SettingActivity"
+            android:name="com.twenty.veinte.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.encounter.twenty.MainActivity"
+            android:name="com.twenty.veinte.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign"
             />
