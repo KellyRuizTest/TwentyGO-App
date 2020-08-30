@@ -143,7 +143,7 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <android.widget.Button
+    <!--<android.widget.Button
         android:id="@+id/register_account_btn"
         android:layout_width="152dp"
         android:layout_height="37dp"
@@ -157,6 +157,25 @@
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
+
+    <com.google.android.material.button.MaterialButton
+         android:id="@+id/register_account_btn"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearTextinputs"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="27dp"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:fontFamily="@font/convergence"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:elevation="4dp"
+        app:cornerRadius="30dp"
+        app:backgroundTint="#8ce3c5"
+        app:rippleColor="@color/colorPrimary"/>
 
 </RelativeLayout>

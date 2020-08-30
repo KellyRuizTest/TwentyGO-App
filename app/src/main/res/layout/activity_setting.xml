@@ -165,7 +165,7 @@
         android:fontFamily="@font/lato"
         android:inputType="textCapCharacters" />
 
-    <Button
+    <!--<Button
         android:id="@+id/register_account"
         android:layout_width="152dp"
         android:layout_height="36dp"
@@ -178,7 +178,27 @@
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         android:fontFamily="@font/convergence"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/register_account"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_sex"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27dp"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:fontFamily="@font/convergence"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:elevation="3dp"
+        app:cornerRadius="30dp"
+        app:backgroundTint="#8ce3c5"
+        app:rippleColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

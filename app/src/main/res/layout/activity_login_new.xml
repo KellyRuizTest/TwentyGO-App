@@ -95,7 +95,25 @@
         android:fontFamily="@font/lato"
         android:text="forgot your password?" />
 
-    <android.widget.Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_account"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="339dp"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:fontFamily="@font/convergence"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:elevation="3dp"
+        app:cornerRadius="30dp"
+        app:backgroundTint="#8ce3c5"
+        app:rippleColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"/>
+
+    <!--<android.widget.Button
         android:id="@+id/login_account"
         android:layout_width="190dp"
         android:layout_height="38dp"
@@ -111,9 +129,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:elevation="5dp"
-        />
+        />-->
 
-    <android.widget.Button
+   <!-- <android.widget.Button
         android:id="@+id/registration_button"
         android:layout_width="304dp"
         android:layout_height="38dp"
@@ -129,6 +147,26 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:elevation="10dp"
-        />
+        /> -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registration_button"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="20dp"
+        android:text="Need A New Account?"
+        android:textAllCaps="false"
+        android:fontFamily="@font/convergence"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:elevation="4dp"
+        app:cornerRadius="30dp"
+        app:backgroundTint="#8ce3c5"
+        app:rippleColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

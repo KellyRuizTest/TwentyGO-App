@@ -61,6 +61,7 @@
         </activity>
         <activity
             android:name="com.twenty.veinte.SettingActivity"
+            android:theme="@style/MyDesign"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.twenty.veinte.MainActivity"

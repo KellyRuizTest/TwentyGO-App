@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="6dp"
@@ -13,28 +14,53 @@
     android:layout_marginTop="8dp"
     android:layout_marginBottom="4dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/avatar_image"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="8dp"
-        android:foregroundGravity="center"
-        android:src="@drawable/usermale"
-        app:civ_border_color="#90a4ae"
-        app:civ_border_width="0.7dp" />
-
-    <TextView
-        android:id="@+id/name_user"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="8dp"
-        android:text="John Doe"
-        android:fontFamily="@font/lato"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:id="@+id/beforeCardview"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="2dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/usermale"
+            card_view:civ_border_color="#90a4ae"
+            card_view:civ_border_width="0.7dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:layout_marginStart="4dp"
+            android:text="John Doe"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/avatar_image"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/report_post"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.9"
+            android:background="@drawable/dots"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
 

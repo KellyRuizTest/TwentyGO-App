@@ -1,16 +1,32 @@
 package com.twenty.veinte
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.text.style.TypefaceSpan
+import android.text.util.Linkify
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_registartion.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -18,6 +34,30 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_registartion)
+
+
+        val builder = MaterialAlertDialogBuilder(this, R.style.MyThemeOverlay_MaterialComponents_MaterialAlertDialog)
+        val tittle = SpannableString("Terms and Data Policy")
+        tittle.setSpan(ForegroundColorSpan(Color.parseColor("#121212")),0, tittle.length, 0)
+        tittle.setSpan(StyleSpan(Typeface.BOLD),0,tittle.length,0)
+        tittle.setSpan(TypefaceSpan("sans-serif-light"),0,tittle.length,0)
+
+
+        val s = SpannableString("https://drive.google.com/file/d/1d0S1Pp-vC7Xsof35o6YHOWJJHqnFluXR/view?usp=sharing")
+        Linkify.addLinks(s, Linkify.WEB_URLS)
+        val textView = TextView(applicationContext)
+        textView.text = s
+        textView.movementMethod = LinkMovementMethod.getInstance()
+
+
+        builder.setTitle(tittle)
+        builder.setMessage("By clicking continue, you agree to our Terms and Privacy Policy ")
+        builder.setView(textView)
+       // builder.setMessage("and Privacy Policy")
+        builder.setPositiveButton("Continue", null)
+        val dialogInterface = builder.create()
+        dialogInterface.show()
+
 
         register_account_btn.setOnClickListener {
             createAccountWithValidations()

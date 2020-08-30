@@ -7,6 +7,7 @@
         <item name="colorPrimary">#243743</item>
         <item name="colorPrimaryDark">#28b78d</item>
         <item name="colorAccent">#5ce1e6</item>
+
         <item name="android:windowContentTransitions">true</item>
     </style>
 
@@ -22,6 +23,17 @@
         <item name="colorPrimary">#243743</item>
         <item name="colorPrimaryDark">#28b78d</item>
         <item name="colorAccent">#5ce1e6</item>
+
+    </style>
+
+    <style name="MyThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+
+    </style>
+
+    <style name="PositiveButtonStyle" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="backgroundTint">@android:color/holo_blue_light</item>
 
     </style>
 

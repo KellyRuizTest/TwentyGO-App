@@ -1,6 +1,7 @@
 package com.twenty.veinte.Adapters
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.twenty.veinte.CommentActivity
 import com.twenty.veinte.FollowingsActivity
 import com.twenty.veinte.Model.Post
@@ -28,6 +30,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.test_layout.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 class PostAdapter(
                     private val mContext: Context,
@@ -62,6 +67,8 @@ class PostAdapter(
         var countComen : TextView = itemView.findViewById(R.id.count_comment)
         var countLike : TextView = itemView.findViewById(R.id.count_like)
         var countJoin : TextView = itemView.findViewById(R.id.join_like)
+
+        var reportPost : ImageView = itemView.findViewById(R.id.report_post);
 
         var snackbarCoordinator : CoordinatorLayout = itemView.findViewById(R.id.coordinatorToSnackbar)
 
@@ -147,6 +154,32 @@ class PostAdapter(
             send_id.putString("userID", post.getUsername())
             send_id.apply()
             (mContext as FragmentActivity).supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.content_fragment, PerfilFragment()).commit()
+        }
+
+        holder.reportPost.setOnClickListener {
+
+            val items = arrayOf("Report", "Share it")
+
+            val builder = MaterialAlertDialogBuilder(mContext)
+                builder.setMessage("Do you want to Report this post?")
+                builder.setPositiveButton("OK"){
+                    dialogInterface, i ->
+
+                    val formato = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                    val currenDate = formato.format(Date())
+                    val reportpostRef = FirebaseDatabase.getInstance().reference.child("Report")
+                    val reportpostMap = HashMap<String, Any>()
+                    reportpostMap["reporter"] = firebaseUser!!.uid;
+                    reportpostMap["userReported"] = post.getUsername()
+                    reportpostMap["date"] = currenDate
+                    reportpostMap["post"] = post.getPid()
+
+                    reportpostRef.push().setValue(reportpostMap)
+                }
+                builder.setNegativeButton("Cancel", null)
+                val dialogInterface = builder.create()
+                dialogInterface.show()
+
         }
 
     }
