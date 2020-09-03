@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'ru.superjob:kotlin-permissions:1.0.3'
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'com.chaos.view:pinview:1.4.3'
     testImplementation 'junit:junit:4.12'

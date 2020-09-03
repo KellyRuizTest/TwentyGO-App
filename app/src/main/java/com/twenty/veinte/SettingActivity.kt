@@ -6,7 +6,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.widget.Toast
 import com.twenty.veinte.Model.Users
 import com.google.android.gms.tasks.Continuation
@@ -53,6 +56,11 @@ class SettingActivity : AppCompatActivity() {
                 saveUserData()
             }
         }
+
+
+        policy_text.movementMethod = LinkMovementMethod.getInstance()
+        terms_text.movementMethod = LinkMovementMethod.getInstance()
+
 
         userCompleteInfo()
     }

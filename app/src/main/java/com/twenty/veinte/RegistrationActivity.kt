@@ -1,14 +1,11 @@
 package com.twenty.veinte
 
-import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
+import android.text.Html
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
@@ -19,49 +16,51 @@ import android.text.util.Linkify
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.twenty.veinte.Model.SuggestionActivity
 import kotlinx.android.synthetic.main.activity_registartion.*
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.HashMap
 
 class RegistrationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         setContentView(R.layout.activity_registartion)
 
-
-        val builder = MaterialAlertDialogBuilder(this, R.style.MyThemeOverlay_MaterialComponents_MaterialAlertDialog)
-        val tittle = SpannableString("Terms and Data Policy")
-        tittle.setSpan(ForegroundColorSpan(Color.parseColor("#121212")),0, tittle.length, 0)
-        tittle.setSpan(StyleSpan(Typeface.BOLD),0,tittle.length,0)
-        tittle.setSpan(TypefaceSpan("sans-serif-light"),0,tittle.length,0)
-
-
-        val s = SpannableString("https://drive.google.com/file/d/1d0S1Pp-vC7Xsof35o6YHOWJJHqnFluXR/view?usp=sharing")
-        Linkify.addLinks(s, Linkify.WEB_URLS)
-        val textView = TextView(applicationContext)
-        textView.text = s
-        textView.movementMethod = LinkMovementMethod.getInstance()
-
-
-        builder.setTitle(tittle)
-        builder.setMessage("By clicking continue, you agree to our Terms and Privacy Policy ")
-        builder.setView(textView)
-       // builder.setMessage("and Privacy Policy")
-        builder.setPositiveButton("Continue", null)
-        val dialogInterface = builder.create()
-        dialogInterface.show()
-
+        privacy_policy_popup()
 
         register_account_btn.setOnClickListener {
             createAccountWithValidations()
         }
+
+    }
+
+    private fun privacy_policy_popup(){
+
+        val builder = MaterialAlertDialogBuilder(
+            this,
+            R.style.MyThemeOverlay_MaterialComponents_MaterialAlertDialog
+        )
+
+        val tittle = SpannableString("Terms and Data Policy")
+        tittle.setSpan(ForegroundColorSpan(Color.parseColor("#121212")), 0, tittle.length, 0)
+        tittle.setSpan(StyleSpan(Typeface.BOLD), 0, tittle.length, 0)
+        tittle.setSpan(TypefaceSpan("sans-serif-light"), 0, tittle.length, 0)
+
+        builder.setTitle(tittle)
+        builder.setMessage(Html.fromHtml("By Clicking continue, you agree to our <a href=\"https://www.twenty20app.com/terms\"> Terms of use </a>"+ "and"+ "<a href=\"https://www.twenty20app.com/privacy-center\"> Privacy Policy </a>"))
+        builder.setPositiveButton("Continue", null)
+        val dialogInterface = builder.create()
+        dialogInterface.show()
+        val mse = dialogInterface.findViewById<TextView>(android.R.id.message)
+        mse!!.movementMethod = LinkMovementMethod.getInstance()
 
     }
 
@@ -74,9 +73,21 @@ class RegistrationActivity : AppCompatActivity() {
 
         when {
             TextUtils.isEmpty(name) -> Toast.makeText(this, "Name is empty", Toast.LENGTH_SHORT).show()
-            TextUtils.isEmpty(email) -> Toast.makeText(this, "Email is required", Toast.LENGTH_SHORT).show()
-            TextUtils.isEmpty(username) -> Toast.makeText(this, "Username is required", Toast.LENGTH_SHORT).show()
-            TextUtils.isEmpty(password) -> Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(email) -> Toast.makeText(
+                this,
+                "Email is required",
+                Toast.LENGTH_SHORT
+            ).show()
+            TextUtils.isEmpty(username) -> Toast.makeText(
+                this,
+                "Username is required",
+                Toast.LENGTH_SHORT
+            ).show()
+            TextUtils.isEmpty(password) -> Toast.makeText(
+                this,
+                "Password is required",
+                Toast.LENGTH_SHORT
+            ).show()
 
             else -> {
                 val userAuth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -85,7 +96,7 @@ class RegistrationActivity : AppCompatActivity() {
                 progressTask.setMessage("Please wait a second")
                 progressTask.setCanceledOnTouchOutside(false)
                 progressTask.show()
-                userAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+                userAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
 
                     if(task.isSuccessful){
                         saveInfo(name, username, email, password, progressTask)
@@ -117,7 +128,7 @@ class RegistrationActivity : AppCompatActivity() {
             progressTask.setMessage("Please wait a second")
             progressTask.setCanceledOnTouchOutside(false)
             progressTask.show()
-            userAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+            userAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
 
                 if(task.isSuccessful){
                     saveInfo(name, username, email, password, progressTask)
@@ -197,7 +208,13 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
 
-    private fun saveInfo(varName : String, varUsername: String, varEmail : String, varPW : String, varProgress : ProgressDialog){
+    private fun saveInfo(
+        varName: String,
+        varUsername: String,
+        varEmail: String,
+        varPW: String,
+        varProgress: ProgressDialog
+    ){
 
         val userID = FirebaseAuth.getInstance().currentUser!!.uid
         val userRef : DatabaseReference = FirebaseDatabase.getInstance().reference.child("Users")
@@ -217,9 +234,11 @@ class RegistrationActivity : AppCompatActivity() {
                 varProgress.dismiss()
                 Toast.makeText(this, "Account was created successfully", Toast.LENGTH_SHORT).show()
 
-                FirebaseDatabase.getInstance().reference.child("Follow").child(userID).child("following").child(userID).setValue(true)
+                FirebaseDatabase.getInstance().reference.child("Follow").child(userID).child("following").child(
+                    userID
+                ).setValue(true)
 
-                val intentToMain = Intent(this, MainActivity::class.java)
+                val intentToMain = Intent(this, SuggestionActivity::class.java)
                 intentToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intentToMain)
                 finish()

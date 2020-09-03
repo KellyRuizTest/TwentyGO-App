@@ -8,4 +8,8 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+
+    <string name="privacy"><a href="https://www.twenty20app.com/privacy-center"> Privacy Policy </a></string>
+    <string name="terms"><a href="https://www.twenty20app.com/terms"> Terms of use </a></string>
+
 </resources>

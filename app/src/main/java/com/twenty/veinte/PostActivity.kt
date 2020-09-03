@@ -19,6 +19,9 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.make
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -44,8 +47,12 @@ class PostActivity : AppCompatActivity() {
     private var storageProfileRef : StorageReference? = null
     private lateinit var  firebaseUser : FirebaseUser
 
+    private var READ_STORAGE_AGREE = 1
+    private var WRITE_STORAGE_AGREE =1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestPermissions()
         setContentView(R.layout.activity_post)
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
@@ -55,7 +62,7 @@ class PostActivity : AppCompatActivity() {
             uploadImage()
         }
 
-        CropImage.activity().setAspectRatio(1,1).start(this)
+        //CropImage.activity().setAspectRatio(1,1).start(this)
 
         back_intent.setOnClickListener { val intentToMain = Intent(this, MainActivity::class.java)
             intentToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -165,6 +172,66 @@ class PostActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun requestPermissions(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) + ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), READ_STORAGE_AGREE);
+            /* if (ActivityCompat.shouldShowRequestPermissionRationale(PostActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
+               /* val snackbar : Snackbar = make(edit_post, "You should accept the permissions to upload photos to your feed", Snackbar.LENGTH_SHORT)
+                 snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+                 snackbar.show()*/
+
+             }else{*/
+        }else {
+            CropImage.activity().setAspectRatio(1,1).start(this)
+        }
+
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_STORAGE_AGREE);
+        }else {
+            //CropImage.activity().setAspectRatio(1,1).start(this)
+        }*/
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+
+            READ_STORAGE_AGREE -> {
+                if ((grantResults.isNotEmpty()) && permissions[0].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        CropImage.activity().setAspectRatio(1, 1).start(this)
+                    } else {
+                        Toast.makeText(applicationContext, "No can put images", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+
+            WRITE_STORAGE_AGREE -> {
+                if ((grantResults.isNotEmpty()) && permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Permissions to WRITE OK",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Permissions to WRITE NOT OK",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+            // super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
     }
 
 }

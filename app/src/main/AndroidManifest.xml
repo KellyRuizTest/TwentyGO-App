@@ -16,30 +16,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.twenty.veinte.NewPassword"
-            android:theme="@style/MyDesign" />
-        <activity android:name="com.twenty.veinte.VerifyEmail" />
-        <activity
-            android:name="com.twenty.veinte.ForgotPasswrod"
-            android:theme="@style/MyDesign" />
-        <activity
-            android:name="com.twenty.veinte.DetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDesign"
-            />
-        <activity android:name="com.twenty.veinte.FollowingsActivity" />
+            android:name=".Model.SuggestionActivity"
+            android:theme="@style/MyDesign">
+        </activity>
         <activity
-            android:name="com.twenty.veinte.CommentActivity"
+            android:name=".NewPassword"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDesign" />
+        <activity android:name=".VerifyEmail" />
+        <activity
+            android:name=".ForgotPasswrod"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDesign" />
+        <activity
+            android:name=".DetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDesign" />
+        <activity android:name=".FollowingsActivity" />
+        <activity
+            android:name=".CommentActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.twenty.veinte.PostActivity"
+            android:name=".PostActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.twenty.veinte.RegistrationActivity"
+            android:name=".RegistrationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign" />
         <activity
-            android:name="com.twenty.veinte.SplashScreen"
+            android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -48,9 +55,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.twenty.veinte.LoginActivity"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDesign">
             <intent-filter>
@@ -60,14 +66,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.twenty.veinte.SettingActivity"
-            android:theme="@style/MyDesign"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.twenty.veinte.MainActivity"
+            android:name=".SettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDesign"
-            />
+            android:theme="@style/MyDesign" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDesign" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
