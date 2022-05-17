@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:id="@+id/layout_home_appbar" >
 
         <androidx.appcompat.widget.Toolbar
@@ -20,15 +21,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                >
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/t20logo"
+                    android:id="@+id/avatar_image"
+                    android:layout_width="68dp"
+                    android:layout_height="34dp"
+                    android:layout_marginLeft="0dp"
                     android:layout_alignParentLeft="true"
-                    android:scaleType="centerCrop"
-                    />
+                    android:foregroundGravity="center"
+                    android:src="@drawable/logito" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

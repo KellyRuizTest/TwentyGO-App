@@ -196,8 +196,8 @@
         android:textSize="16sp"
         android:elevation="3dp"
         app:cornerRadius="30dp"
-        app:backgroundTint="#8ce3c5"
-        app:rippleColor="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimary"
+        app:rippleColor="#8ce3c5"
         android:layout_centerHorizontal="true"/>
 
 

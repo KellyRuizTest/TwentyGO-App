@@ -28,7 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:src="@drawable/logitot20"
+        android:src="@drawable/logogroup"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,7 +43,7 @@
         android:layout_marginEnd="41dp"
         android:hint="Email or username"
         android:fontFamily="@font/lato"
-        app:boxStrokeColor="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimaryDark"
         app:boxStrokeWidthFocused="2dp"
         app:startIconDrawable="@drawable/ic_baseline_email_24"
         app:endIconMode="clear_text">
@@ -104,12 +104,12 @@
         android:text="Login"
         android:textAllCaps="false"
         android:fontFamily="@font/convergence"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="18sp"
         android:elevation="3dp"
         app:cornerRadius="30dp"
-        app:backgroundTint="#8ce3c5"
+        app:backgroundTint="#625bf7"
         app:rippleColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"/>
 
@@ -160,12 +160,12 @@
         android:text="Need A New Account?"
         android:textAllCaps="false"
         android:fontFamily="@font/convergence"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="18sp"
         android:elevation="4dp"
         app:cornerRadius="30dp"
-        app:backgroundTint="#8ce3c5"
+        app:backgroundTint="#625bf7"
         app:rippleColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"/>
 

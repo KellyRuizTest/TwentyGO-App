@@ -114,7 +114,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:hint="DD/MM/YYY"
-            android:textColor="#94e4a5"
+            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/concert_one"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_joins" />

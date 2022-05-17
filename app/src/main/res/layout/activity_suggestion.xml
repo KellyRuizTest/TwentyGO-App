@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logitot20"
+        android:src="@drawable/logogroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -105,7 +105,7 @@
                 android:text="Next"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
-                app:backgroundTint="#8ce3c5"
+                app:backgroundTint="@color/colorPrimary"
                 app:cornerRadius="40dp"
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true" />

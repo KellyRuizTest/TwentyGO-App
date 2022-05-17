@@ -61,22 +61,23 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <android.widget.Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/send_email_btn"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_below="@+id/textfield_email_send"
         android:layout_marginStart="31dp"
         android:layout_marginEnd="49dp"
-        android:background="@drawable/borde_redondo_light"
         android:elevation="5dp"
         android:fontFamily="@font/convergence"
         android:text="Next"
         android:textAllCaps="false"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        />
 
 
 

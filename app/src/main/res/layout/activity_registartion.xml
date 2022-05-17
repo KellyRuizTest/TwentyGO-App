@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="144dp"
         android:layout_marginTop="52dp"
-        android:src="@drawable/logitot20" />
+        android:src="@drawable/logogroup" />
 
     <TextView
         android:id="@+id/textView"
@@ -170,12 +170,12 @@
         android:text="Register"
         android:textAllCaps="false"
         android:fontFamily="@font/convergence"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="16sp"
         android:elevation="4dp"
         app:cornerRadius="30dp"
-        app:backgroundTint="#8ce3c5"
-        app:rippleColor="@color/colorPrimary"/>
+        app:backgroundTint="@color/colorPrimary"
+        app:rippleColor="#8ce3c5"/>
 
 </RelativeLayout>
