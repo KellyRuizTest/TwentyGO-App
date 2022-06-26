@@ -8,7 +8,7 @@ Connect with friends, share what you’re up to, or see what's new from others a
 Explore our community where you can share everything from your daily moments to life's highlights.
 
 ## Screenshots 📹
-![](media/TwentyGo.png)
+![](media/banner.png)
 
 ## App Features
 
@@ -26,9 +26,6 @@ Express Yourself and Connect With Friends</BR>
 ### **JOIN**
 • After discover some interesting posts from your friends you can join them</BR>
 • Ask for more info, comment and join to your friends in its events.
-
-
-
 
 ## ToDo
 - Define method to qualify users that post Encounters.
