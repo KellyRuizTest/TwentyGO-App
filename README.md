@@ -1,4 +1,4 @@
-# **Twenty20 Go App**
+# **Twenty Go App**
 
 **Twenty Go** is a simple social App to conect people who wants to be part of Events with others,
 All you have to do is a post a new Encounter with description what do you want to do or support.
@@ -6,6 +6,9 @@ All you have to do is a post a new Encounter with description what do you want t
 People read these post and they can likes or joined thru "joins".
 Connect with friends, share what you’re up to, or see what's new from others all over the world. 
 Explore our community where you can share everything from your daily moments to life's highlights.
+
+## Screenshots 📹
+![](media/Twenty Go.png)
 
 ## App Features
 
@@ -24,7 +27,6 @@ Express Yourself and Connect With Friends</BR>
 • After discover some interesting posts from your friends you can join them</BR>
 • Ask for more info, comment and join to your friends in its events.
 
-## Screenshots 📹
 
 
 
