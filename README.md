@@ -8,7 +8,7 @@ Connect with friends, share what you’re up to, or see what's new from others a
 Explore our community where you can share everything from your daily moments to life's highlights.
 
 ## Screenshots 📹
-![](media/Twenty Go.png)
+![](media/TwentyGo.png)
 
 ## App Features
 
