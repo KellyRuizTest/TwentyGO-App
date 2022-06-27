@@ -27,7 +27,7 @@ Express Yourself and Connect With Friends</BR>
 • After discover some interesting posts from your friends you can join them</BR>
 • Ask for more info, comment and join to your friends in its events.
 
-## ToDo
+## Future direction
 - Define method to qualify users that post Encounters.
 - Send notifications about the events coming.
 - Add filters to the pictures.
